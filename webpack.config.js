@@ -34,5 +34,5 @@ function timestamp() {
     var isoDate = [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join('-')
     var isoTime = [pad(d.getHours()), pad(d.getMinutes()), pad(d.getSeconds())].join(':')
     return isoDate + 'T' + isoTime
-    function pad(n) {return n < 10 ? "0" + n : n}
+    function pad(n) {return n < 10 ? '0' + n : n}
 }
