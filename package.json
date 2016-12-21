@@ -1,9 +1,21 @@
 {
+  "name": "baybulatov-util-js",
+  "version": "0.0.0",
   "dependencies": {
     "lodash": "^4.17.2",
     "moment": "^2.17.0"
   },
   "devDependencies": {
     "webpack": "^1.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArturBaybulatov/baybulatov-util-js.git"
+  },
+  "author": "NeuracorrCommon@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArturBaybulatov/baybulatov-util-js/issues"
+  },
+  "homepage": "https://github.com/ArturBaybulatov/baybulatov-util-js#readme"
 }
