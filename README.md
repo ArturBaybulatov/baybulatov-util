@@ -7,7 +7,7 @@ npm install baybulatov-util-js
 Bundle that's suitable for usage in browser:
 
 ```
-<script src='https://unpkg.com/baybulatov-util-js@0.0.0/dist/baybulatov-util.js'></script>
+<script src='https://unpkg.com/baybulatov-util-js/dist/baybulatov-util.js'></script>
 ```
 
 ### Development
@@ -19,8 +19,12 @@ npm install
 webpack
 ```
 
-When publishing use `--add-version` option:
+### Publishing
 
 ```
-webpack --add-version
+npm version <update_type>
+webpack
+npm publish
 ```
+
+where `update_type` is one of the semantic versioning release types, `patch`, `minor`, or `major`

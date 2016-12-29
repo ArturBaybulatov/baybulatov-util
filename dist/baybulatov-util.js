@@ -54,7 +54,7 @@ var $$ =
 
 	var $$ = {}
 
-	$$.VERSION = ("2016-12-21T15:14:48")
+	$$.VERSION = ("0.0.1")
 
 	function morph(number, words) {
 	    var CHOICES = [2, 0, 1, 1, 1, 2]
