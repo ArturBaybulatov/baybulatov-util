@@ -8,6 +8,7 @@
   "devDependencies": {
     "webpack": "^1.14.0"
   },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArturBaybulatov/baybulatov-util-js.git"
