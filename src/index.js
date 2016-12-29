@@ -1,13 +1,15 @@
 var _ = require('lodash').runInContext()
 var moment = require('moment')
 var util = require('util')
+var packageJson = require(__dirname + '/../package.json')
+
 
 // Configure Lodash:
 _.mixin(_, {chain: true}); Object.defineProperty(_.prototype, 'v', {get: _.prototype.value})
 
 var $$ = {}
 
-$$.VERSION = VERSION
+$$.VERSION = packageJson.version
 
 function morph(number, words) {
     var CHOICES = [2, 0, 1, 1, 1, 2]

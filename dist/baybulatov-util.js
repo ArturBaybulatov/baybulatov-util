@@ -48,13 +48,15 @@ var $$ =
 	var _ = __webpack_require__(1).runInContext()
 	var moment = __webpack_require__(2)
 	var util = __webpack_require__(3)
+	var packageJson = __webpack_require__(7)
+
 
 	// Configure Lodash:
 	_.mixin(_, {chain: true}); Object.defineProperty(_.prototype, 'v', {get: _.prototype.value})
 
 	var $$ = {}
 
-	$$.VERSION = ("0.0.1")
+	$$.VERSION = packageJson.version
 
 	function morph(number, words) {
 	    var CHOICES = [2, 0, 1, 1, 1, 2]
@@ -1170,6 +1172,34 @@ var $$ =
 	  }
 	}
 
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"name": "baybulatov-util-js",
+		"version": "0.0.2",
+		"dependencies": {
+			"lodash": "^4.17.2",
+			"moment": "^2.17.0"
+		},
+		"devDependencies": {
+			"json-loader": "^0.5.4",
+			"webpack": "^1.14.0"
+		},
+		"main": "src/index.js",
+		"repository": {
+			"type": "git",
+			"url": "git+https://github.com/ArturBaybulatov/baybulatov-util-js.git"
+		},
+		"author": "NeuracorrCommon@gmail.com",
+		"license": "ISC",
+		"bugs": {
+			"url": "https://github.com/ArturBaybulatov/baybulatov-util-js/issues"
+		},
+		"homepage": "https://github.com/ArturBaybulatov/baybulatov-util-js#readme"
+	};
 
 /***/ }
 /******/ ]);

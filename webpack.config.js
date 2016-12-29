@@ -1,5 +1,4 @@
 var webpack = require('webpack')
-var VERSION = require('./package.json').version
 
 module.exports = {
     entry: {
@@ -14,15 +13,20 @@ module.exports = {
         libraryTarget: 'var', // ...to a root scope variable
     },
     
+    module: {
+        loaders: [
+            {test: /\.json$/, loader: 'json'},
+        ],
+    },
+    
     externals: {
         lodash: '_',
         moment: 'moment',
-        // util: 'util',
     },
     
     plugins: [
         new webpack.optimize.UglifyJsPlugin({test: /\.min\.js$/}),
         new webpack.SourceMapDevToolPlugin({test: /\.min\.js$/, filename: '[name].js.map'}),
-        new webpack.DefinePlugin({VERSION: JSON.stringify(VERSION)}),
+        // new webpack.DefinePlugin({VERSION: JSON.stringify(VERSION)}),
     ],
 }

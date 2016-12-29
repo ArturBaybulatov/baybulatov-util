@@ -1,11 +1,12 @@
 {
   "name": "baybulatov-util-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "lodash": "^4.17.2",
     "moment": "^2.17.0"
   },
   "devDependencies": {
+    "json-loader": "^0.5.4",
     "webpack": "^1.14.0"
   },
   "main": "src/index.js",
