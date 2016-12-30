@@ -58,6 +58,8 @@ var $$ =
 
 	$$.VERSION = packageJson.version
 
+	$$.util = util
+
 	function morph(number, words) {
 	    var CHOICES = [2, 0, 1, 1, 1, 2]
 
@@ -1179,7 +1181,7 @@ var $$ =
 
 	module.exports = {
 		"name": "baybulatov-util-js",
-		"version": "0.0.2",
+		"version": "0.0.3",
 		"dependencies": {
 			"lodash": "^4.17.2",
 			"moment": "^2.17.0"

@@ -11,6 +11,8 @@ var $$ = {}
 
 $$.VERSION = packageJson.version
 
+$$.util = util
+
 function morph(number, words) {
     var CHOICES = [2, 0, 1, 1, 1, 2]
 
