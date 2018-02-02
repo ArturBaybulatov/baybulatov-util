@@ -1,0 +1,80 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "baybulatov-util-js",
+        "scope": null,
+        "escapedName": "baybulatov-util-js",
+        "name": "baybulatov-util-js",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Baybulatov.Artur\\Documents\\projects\\baybulatov-util-js\\ggg"
+    ]
+  ],
+  "_from": "baybulatov-util-js@latest",
+  "_id": "baybulatov-util-js@0.2.3",
+  "_inCache": true,
+  "_location": "/baybulatov-util-js",
+  "_nodeVersion": "7.5.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/baybulatov-util-js-0.2.3.tgz_1517585235899_0.29192024492658675"
+  },
+  "_npmUser": {
+    "name": "arturbaybulatov",
+    "email": "NeuracorrCommon@gmail.com"
+  },
+  "_npmVersion": "4.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "baybulatov-util-js",
+    "scope": null,
+    "escapedName": "baybulatov-util-js",
+    "name": "baybulatov-util-js",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/baybulatov-util-js/-/baybulatov-util-js-0.2.3.tgz",
+  "_shasum": "f6aa423d3a34dda554a529d8e7b0d79f1668f882",
+  "_shrinkwrap": null,
+  "_spec": "baybulatov-util-js",
+  "_where": "C:\\Users\\Baybulatov.Artur\\Documents\\projects\\baybulatov-util-js\\ggg",
+  "author": {
+    "name": "NeuracorrCommon@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ArturBaybulatov/baybulatov-util-js/issues"
+  },
+  "dependencies": {},
+  "description": "https://www.npmjs.com/package/baybulatov-util-js",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "f6aa423d3a34dda554a529d8e7b0d79f1668f882",
+    "tarball": "https://registry.npmjs.org/baybulatov-util-js/-/baybulatov-util-js-0.2.3.tgz"
+  },
+  "homepage": "https://github.com/ArturBaybulatov/baybulatov-util-js#readme",
+  "license": "ISC",
+  "main": "baybulatov-util.js",
+  "maintainers": [
+    {
+      "name": "arturbaybulatov",
+      "email": "NeuracorrCommon@gmail.com"
+    }
+  ],
+  "name": "baybulatov-util-js",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArturBaybulatov/baybulatov-util-js.git"
+  },
+  "scripts": {},
+  "version": "0.2.3"
+}

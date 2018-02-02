@@ -23,12 +23,10 @@
 
     var util = window.util = {};
 
-    util._version = '0.2.1';
+    util._version = 'dev';
 
 
     var curry = util.curry = function(fn, arity) {
-        curry._version = '1.0';
-
         arity = arity || fn.length
 
         return function f1() {
@@ -71,8 +69,6 @@
 
 
     var isSameStringI = util.isSameStringI = function(str1, str2) {
-        isSameStringI._version = '0.2';
-
         if (typeof str1 !== 'string' || typeof str2 !== 'string')
             return false;
 
@@ -170,15 +166,11 @@
 
 
     var compareNatural3 = util.compareNatural3 = function(a, b) {
-        compareNatural3._version = '1.0';
-
         return String.prototype.localeCompare.call(a, b, undefined, { numeric: true });
     };
 
 
     var visuallyRandomNumber = util.visuallyRandomNumber = function() {
-        visuallyRandomNumber._version = '1.0';
-
         return _.sample([_.random(1, 9), _.random(10, 99), _.random(100, 999)]);
     };
 
@@ -189,8 +181,6 @@
 
 
     var humanFileSize = util.humanFileSize = function(size) {
-        humanFileSize._version = '1.0';
-
         var i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
         return Number((size / Math.pow(1024, i)).toFixed(2)) + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
     };
@@ -206,9 +196,12 @@
      *     или `±Infinity`
      */
     var isNumber = util.isNumber = function(val) {
-        isNumber._version = '1.0';
-
         return typeof val === 'number' && !Number.isNaN(val) && Math.abs(val) !== Infinity;
+    };
+
+
+    var isPositive = util.isPositive = function(val) {
+        return isNumber(val) && val > 0;
     };
 
 
@@ -217,8 +210,6 @@
      *     если значение -- `NaN` или `±Infinity` (касается их строковых представлений тоже)
      */
     var isNumeric = util.isNumeric = function(val) {
-        isNumeric._version = '1.1';
-
         if (isNumber(val))
             return true;
 
@@ -238,8 +229,6 @@
 
 
     var fromNumeric = util.fromNumeric = function(val, defaultVal) {
-        fromNumeric._version = '0.1';
-
         if (arguments.length <= 1)
             defaultVal = null;
 
@@ -249,32 +238,26 @@
 
     /** Проверяет является ли значение `val` непустой сторкой (при проверке пробелы отсекаются) */
     var isNonEmptyString = util.isNonEmptyString = function(val) {
-        isNonEmptyString._version = '0.1';
         return typeof val === 'string' && val.trim() !== '';
     };
 
 
     var isNonEmptyArray = util.isNonEmptyArray = function(val) {
-        isNonEmptyArray._version = '0.1';
         return Array.isArray(val) && val.length !== 0;
     };
 
 
     var isJqElement = util.isJqElement = function(val) {
-        isJqElement._version = '0.2';
         return val instanceof jQuery && val.length === 1; // Only one expected
     };
 
 
     var isNonEmptyJqCollection = util.isNonEmptyJqCollection = function(val) {
-        isNonEmptyJqCollection._version = '0.1';
         return val instanceof jQuery && val.length !== 0;
     };
 
 
     var flat2tree = util.flat2tree = function(arr, idKey, parentIdKey, childrenKey) {
-        flat2tree._version = '1.0';
-
         var groups = _.groupBy(arr, function(item) { return item[parentIdKey] == null ? '__root' : item[parentIdKey] });
         arr.forEach(function(item) { delete item[parentIdKey] }); // No need
         var refs = _.keyBy(arr, idKey);
@@ -289,8 +272,6 @@
 
 
     var generateTree = util.generateTree = function(idKey, parentIdKey, childrenKey, nameKey) {
-        generateTree._version = '1.0';
-
         idKey == null && (idKey = 'id');
         parentIdKey == null && (parentIdKey = 'parentId');
         childrenKey == null && (childrenKey = 'children');
@@ -327,8 +308,6 @@
 
 
     var lorem = util.lorem = function(sentenceCount, wordCount) {
-        lorem._version = '1.0';
-
         if (sentenceCount == null)
             sentenceCount = _.random(1, 5);
 
@@ -352,8 +331,6 @@
 
 
     var morph = util.morph = function(number, words) {
-        morph._version = '1.0';
-
         var CHOICES = [2, 0, 1, 1, 1, 2];
 
         if (number % 100 > 4 && number % 100 < 20) {
@@ -368,8 +345,6 @@
 
 
     var randomIdent = util.randomIdent = function(size) {
-        randomIdent._version = '1.0';
-
         if (size == null)
             size = 8;
 
@@ -390,16 +365,12 @@
 
 
     var cycle = util.cycle = function(arr) {
-        cycle._version = '1.0';
-
         cycle._i == null && (cycle._i = 0)
         if (cycle._i < arr.length) { return arr[cycle._i++] } else { cycle._i = 0; return arr[cycle._i++] }
     };
 
 
     var timeout = util.timeout = function(fn, time) {
-        timeout._version = '1.1';
-
         if (time == null)
             time = 1000;
 
@@ -416,8 +387,6 @@
 
 
     var sortTree = util.sortTree = function(items, sortKey, childrenKey) {
-        sortTree._version = '1.3';
-
         sortKey == null && (console.warn('No sort key provided'), sortKey = 'order');
         childrenKey == null && (childrenKey = 'children');
 
@@ -436,8 +405,6 @@
 
     /** Пытается распарсить JSON-строку, в случае ошибки возвращает `null` */
     var tryParseJsonOrNull = util.tryParseJsonOrNull = function(json) {
-        tryParseJsonOrNull._version = '0.2';
-
         try {
             return JSON.parse(json);
         } catch (err) {
@@ -448,8 +415,6 @@
 
     /** Удостоверяется, что условие `cond === true`, иначе выбрасывает ошибку с сообщением `errMsg` */
     var ensure = util.ensure = function(cond, errMsg) {
-        ensure._version = '0.2';
-
         if (typeof cond !== 'boolean')
             throw new TypeError('Boolean expected');
 
@@ -508,15 +473,12 @@
      * Если разделитель не найден, возвращает `['', str]`
      */
     var splitOnFirst = util.splitOnFirst = function(str, sep) {
-        splitOnFirst._version = '0.1';
         ensure(typeof str === 'string' && typeof sep === 'string', 'String expected');
         return [str.substr(0, str.indexOf(sep)), str.substr(str.indexOf(sep) + 1)];
     };
 
 
     var responseToError = util.responseToError = function(res) {
-        responseToError._version = '0.1';
-
         var msg = res.status + ' ' + res.statusText;
 
         if (isNonEmptyString(res.responseText))
@@ -527,8 +489,6 @@
 
 
     var handleRejection = util.handleRejection = function(msg, verbose) {
-        handleRejection._version = '0.5';
-
         ensure.nonEmptyString(msg);
         ensure.maybe.boolean(verbose);
 
