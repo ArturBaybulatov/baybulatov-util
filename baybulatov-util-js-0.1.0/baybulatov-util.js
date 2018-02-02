@@ -24,7 +24,7 @@
 
     var util = window.util = {};
 
-    util._version = '1.0.0';
+    util._version = '0.1.0';
 
 
     function curry(fn, arity) {
@@ -79,6 +79,15 @@
     }
 
     util.isSameDay = isSameDay;
+
+
+    function isSameStringI(str1, str2) {
+        isSameStringI._version = '0.1';
+        ensure(typeof str1 === 'string' && typeof str2 === 'string', 'String expected');
+        return str1.trim().toUpperCase() === str2.trim().toUpperCase();
+    }
+
+    util.isSameStringI = isSameStringI;
 
 
     function compareNatural(a, b) {
@@ -217,8 +226,8 @@
 
 
     /**
-     * Проверяет, является ли значение `val` числом (по типу). Возвращает `false`, если значение -- `NaN`
-     *     или `±Infinity`
+     * РџСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ `val` С‡РёСЃР»РѕРј (РїРѕ С‚РёРїСѓ). Р’РѕР·РІСЂР°С‰Р°РµС‚ `false`, РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ -- `NaN`
+     *     РёР»Рё `В±Infinity`
      */
     function isNumber(val) {
         isNumber._version = '1.0';
@@ -230,8 +239,8 @@
 
 
     /**
-     * Проверяет, является ли значение `val` числом или строкой, представляющей число. Возвращает `false`,
-     *     если значение -- `NaN` или `±Infinity` (касается их строковых представлений тоже)
+     * РџСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ `val` С‡РёСЃР»РѕРј РёР»Рё СЃС‚СЂРѕРєРѕР№, РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‰РµР№ С‡РёСЃР»Рѕ. Р’РѕР·РІСЂР°С‰Р°РµС‚ `false`,
+     *     РµСЃР»Рё Р·РЅР°С‡РµРЅРёРµ -- `NaN` РёР»Рё `В±Infinity` (РєР°СЃР°РµС‚СЃСЏ РёС… СЃС‚СЂРѕРєРѕРІС‹С… РїСЂРµРґСЃС‚Р°РІР»РµРЅРёР№ С‚РѕР¶Рµ)
      */
     function isNumeric(val) {
         isNumeric._version = '1.1';
@@ -268,13 +277,29 @@
     util.fromNumeric = fromNumeric;
 
 
-    /** Проверяет является ли значение `val` непустой сторкой (при проверке пробелы отсекаются) */
+    /** РџСЂРѕРІРµСЂСЏРµС‚ СЏРІР»СЏРµС‚СЃСЏ Р»Рё Р·РЅР°С‡РµРЅРёРµ `val` РЅРµРїСѓСЃС‚РѕР№ СЃС‚РѕСЂРєРѕР№ (РїСЂРё РїСЂРѕРІРµСЂРєРµ РїСЂРѕР±РµР»С‹ РѕС‚СЃРµРєР°СЋС‚СЃСЏ) */
     function isNonEmptyString(val) {
         isNonEmptyString._version = '0.1';
         return typeof val === 'string' && val.trim() !== '';
     }
 
     util.isNonEmptyString = isNonEmptyString;
+
+
+    function isNonEmptyArray(val) {
+        isNonEmptyArray._version = '0.1';
+        return Array.isArray(val) && val.length !== 0;
+    }
+
+    util.isNonEmptyArray = isNonEmptyArray;
+
+
+    function isJqElement(val) {
+        isJqElement._version = '0.1';
+        return val instanceof jQuery && val.length !== 0;
+    }
+
+    util.isJqElement = isJqElement;
 
 
     function flat2tree(arr, idKey, parentIdKey, childrenKey) {
@@ -457,7 +482,7 @@
     util.sortTree = sortTree;
 
 
-    /** Пытается распарсить JSON-строку, в случае ошибки возвращает `null` */
+    /** РџС‹С‚Р°РµС‚СЃСЏ СЂР°СЃРїР°СЂСЃРёС‚СЊ JSON-СЃС‚СЂРѕРєСѓ, РІ СЃР»СѓС‡Р°Рµ РѕС€РёР±РєРё РІРѕР·РІСЂР°С‰Р°РµС‚ `null` */
     function tryParseJsonOrNull(json) {
         tryParseJsonOrNull._version = '0.2';
 
@@ -471,7 +496,7 @@
     util.tryParseJsonOrNull = tryParseJsonOrNull;
 
 
-    /** Удостоверяется, что условие `cond === true`, иначе выбрасывает ошибку с сообщением `errMsg` */
+    /** РЈРґРѕСЃС‚РѕРІРµСЂСЏРµС‚СЃСЏ, С‡С‚Рѕ СѓСЃР»РѕРІРёРµ `cond === true`, РёРЅР°С‡Рµ РІС‹Р±СЂР°СЃС‹РІР°РµС‚ РѕС€РёР±РєСѓ СЃ СЃРѕРѕР±С‰РµРЅРёРµРј `errMsg` */
     function ensure(cond, errMsg) {
         ensure._version = '0.2';
 
@@ -486,9 +511,9 @@
 
 
     /**
-     * Разделяет строку `str` на две части по первому попавшемуся разделителю `sep` (тоже строка).
-     * Возвращает массив из двух строк. Сам разделитель из результатов убирается.
-     * Если разделитель не найден, возвращает `['', str]`
+     * Р Р°Р·РґРµР»СЏРµС‚ СЃС‚СЂРѕРєСѓ `str` РЅР° РґРІРµ С‡Р°СЃС‚Рё РїРѕ РїРµСЂРІРѕРјСѓ РїРѕРїР°РІС€РµРјСѓСЃСЏ СЂР°Р·РґРµР»РёС‚РµР»СЋ `sep` (С‚РѕР¶Рµ СЃС‚СЂРѕРєР°).
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ РёР· РґРІСѓС… СЃС‚СЂРѕРє. РЎР°Рј СЂР°Р·РґРµР»РёС‚РµР»СЊ РёР· СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ СѓР±РёСЂР°РµС‚СЃСЏ.
+     * Р•СЃР»Рё СЂР°Р·РґРµР»РёС‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ, РІРѕР·РІСЂР°С‰Р°РµС‚ `['', str]`
      */
     function splitOnFirst(str, sep) {
         splitOnFirst._version = '0.1';
@@ -497,4 +522,57 @@
     }
 
     util.splitOnFirst = splitOnFirst;
+
+
+    function handleRejection(summary) {
+        handleRejection._version = '0.3';
+
+        ensure(isNonEmptyString(summary), 'Non-empty string expected');
+
+        return function(err) {
+            var message = err.message;
+
+            if (!isNonEmptyString(message)) {
+                message = summary;
+                summary = 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°';
+            }
+
+            alert.error(summary, message);
+            console.error(err);
+        };
+    };
+
+    util.handleRejection = handleRejection;
+
+
+    var alert = {
+        _version: '0.1',
+        success: _buildAlert('success'),
+        warning: _buildAlert('warning'),
+        error: _buildAlert('error'),
+    };
+
+    util.alert = alert;
+
+    function _buildAlert(type) {
+        ensure(['success', 'warning', 'error'].some(function(s) { return s === type }), 'Pre-defined value expected');
+
+        return function(title, body) {
+            ensure(isNonEmptyString(title) || isNumber(title), 'Non-empty string or number expected');
+            ensure(typeof body === 'string' || isNumber(body) || body == null, 'String, number or null-like expected');
+
+            if (!isNonEmptyString(body)) {
+                body = title;
+                title = '';
+            }
+
+            $('<p>', { attr: { title: title }, text: body, css: { lineHeight: '1.4em' } }).dialog({
+                dialogClass: 'alert alert--' + type,
+                modal: true,
+                show: { effect: 'fade' },
+                hide: { effect: 'fade' },
+                buttons: { OK: function() { $(this).dialog('close') } },
+            }).dialog('widget').css('zIndex', 99999);
+        };
+    }
 }());
