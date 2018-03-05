@@ -403,16 +403,6 @@
     };
 
 
-    /** Пытается распарсить JSON-строку, в случае ошибки возвращает `null` */
-    var tryParseJsonOrNull = util.tryParseJsonOrNull = function(json) {
-        try {
-            return JSON.parse(json);
-        } catch (err) {
-            return null;
-        }
-    };
-
-
     /** Удостоверяется, что условие `cond === true`, иначе выбрасывает ошибку с сообщением `errMsg` */
     var ensure = util.ensure = function(cond, errMsg) {
         if (typeof cond !== 'boolean')
