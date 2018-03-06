@@ -1,6 +1,6 @@
 {
   "name": "baybulatov-util-js",
-  "version": "dev",
+  "version": "0.3.0",
   "main": "baybulatov-util.js",
   "repository": {
     "type": "git",

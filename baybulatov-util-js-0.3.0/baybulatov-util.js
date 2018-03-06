@@ -23,7 +23,7 @@
 
     var util = window.util = {};
 
-    util._version = 'dev';
+    util._version = '0.3.0';
 
 
     var curry = util.curry = function(fn, arity) {
