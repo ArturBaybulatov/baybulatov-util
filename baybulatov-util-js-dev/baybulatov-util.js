@@ -2,28 +2,18 @@
     'use strict';
 
 
-    // Base ---------------------------------------
-
     var bind = _.partial;
 
     var toString = Function.call.bind({}.toString);
     var slice = Function.call.bind([].slice);
 
 
-    // Polyfills ----------------------------------
+    var util = window.util = {};
+    util._version = 'dev';
+
 
     if (!('isArray' in Array))
         Array.isArray = function(val) { return toString(val) === '[object Array]' };
-
-    if (!('isNaN' in Number))
-        Number.isNaN = function(val) { return val !== val };
-
-
-    // Utils --------------------------------------
-
-    var util = window.util = {};
-
-    util._version = 'dev';
 
 
     var curry = util.curry = function(fn, arity) {
@@ -187,34 +177,24 @@
 
 
     var dateValid = util.dateValid = function(date) {
-        return !Number.isNaN(date.getTime());
+        return isNumber(date.getTime());
     };
 
 
-    /**
-     * Проверяет, является ли значение `val` числом (по типу). Возвращает `false`, если значение -- `NaN`
-     *     или `±Infinity`
-     */
+    /** Проверяет, является ли значение `val` реальным числом (в т.ч. по типу) */
     var isNumber = util.isNumber = function(val) {
-        return typeof val === 'number' && !Number.isNaN(val) && Math.abs(val) !== Infinity;
+        return typeof val === 'number' && isFinite(val);
     };
 
 
-    var isPositive = util.isPositive = function(val) {
-        return isNumber(val) && val > 0;
-    };
+    if (!('isInteger' in Number))
+        Number.isInteger = function(val) { return isNumber(val) && val % 1 === 0 };
 
 
-    /**
-     * Проверяет, является ли значение `val` числом или строкой, представляющей число. Возвращает `false`,
-     *     если значение -- `NaN` или `±Infinity` (касается их строковых представлений тоже)
-     */
+    /** Проверяет, является ли значение `val` реальным числом или строкой, его представляющей */
     var isNumeric = util.isNumeric = function(val) {
         if (isNumber(val))
             return true;
-
-        if (val == null)
-            return false;
 
         if (typeof val !== 'string')
             return false;
@@ -224,7 +204,7 @@
         if (val === '')
             return false;
 
-        return !Number.isNaN(Number(val));
+        return isNumber(Number(val));
     };
 
 
@@ -293,7 +273,8 @@
             obj[idKey] = i;
             obj[parentIdKey] = weightedRandom;
             //obj[nameKey] = 'Foo-' + i;
-            obj[nameKey] = lorem(1, _.sample(3, 50)); // Example
+            obj[nameKey] = lorem(1, _.random(3, 20)); // Example
+            obj.awesome = _.sample([true, false]); // Extra data example
             obj.order = visuallyRandomNumber(); // Extra data example
 
             return obj;
@@ -397,6 +378,7 @@
     _ensurify('jqCollection', function(val) { return val instanceof jQuery }, 'jQuery collection');
     _ensurify('nonEmptyString', isNonEmptyString, 'Non-empty string');
     _ensurify('number', isNumber, 'Number');
+    _ensurify('integer', Number.isInteger, 'Integer');
     _ensurify('numeric', isNumeric, 'Numeric');
     _ensurify('object', _.isObject, 'Object');
     _ensurify('plainObject', _.isPlainObject, 'Plain object');
