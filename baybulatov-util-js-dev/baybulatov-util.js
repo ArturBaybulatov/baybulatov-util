@@ -2,7 +2,7 @@
     'use strict';
 
 
-    var bind = _.partial;
+    var __ = undefined;
 
     var toString = Function.call.bind({}.toString);
     var slice = Function.call.bind([].slice);
@@ -10,6 +10,10 @@
 
     var util = window.util = {};
     util._version = 'dev';
+
+
+    var NoSuchPathError = util.NoSuchPathError = function(msg) { this.message = msg };
+    NoSuchPathError.prototype = Object.create(Error.prototype);
 
 
     var curry = util.curry = function(fn, arity) {
@@ -277,6 +281,60 @@
 
         return flat2tree(arr, idKey, parentIdKey, childrenKey);
     };
+
+
+    var getPath = util.getPath = function(obj, path) {
+        ensure.plainObject(obj);
+        ensure.array(path);
+
+        for (var i = 0; i < path.length; i++) {
+            var fragm = path[i];
+            ensure.nonEmptyString(fragm);
+
+            if (!Array.isArray(obj.children))
+                throw new NoSuchPathError();
+
+            obj = obj.children.find(function(x) { return x.name === fragm });
+
+            if (!_.isPlainObject(obj))
+                throw new NoSuchPathError();
+        }
+
+        return obj;
+    }
+
+
+    var setPath = util.setPath = function(obj, path, data) {
+        ensure.plainObject(obj);
+        ensure.array(path);
+
+        var item = obj;
+
+        for (var i = 0; i < path.length; i++) {
+            var fragm = path[i];
+            ensure.nonEmptyString(fragm);
+
+            if (Array.isArray(item.children)) {
+                var foundItem = item.children.find(function(x) { return x.name === fragm });
+
+                if (_.isPlainObject(foundItem)) {
+                    item = foundItem;
+                } else {
+                    var newObject = { name: fragm };
+                    item.children.push(newObject);
+                    item = newObject;
+                }
+            } else {
+                var newObject = { name: fragm };
+                item.children = [newObject];
+                item = newObject;
+            }
+        }
+
+        item.data = data;
+
+        return obj;
+    }
 
 
     var lorem = util.lorem = function(sentenceCount, wordCount) {
