@@ -12,10 +12,6 @@
     util._version = 'dev';
 
 
-    if (!('isArray' in Array))
-        Array.isArray = function(val) { return toString(val) === '[object Array]' };
-
-
     var curry = util.curry = function(fn, arity) {
         arity = arity || fn.length
 
@@ -185,10 +181,6 @@
     var isNumber = util.isNumber = function(val) {
         return typeof val === 'number' && isFinite(val);
     };
-
-
-    if (!('isInteger' in Number))
-        Number.isInteger = function(val) { return isNumber(val) && val % 1 === 0 };
 
 
     /** Проверяет, является ли значение `val` реальным числом или строкой, его представляющей */
