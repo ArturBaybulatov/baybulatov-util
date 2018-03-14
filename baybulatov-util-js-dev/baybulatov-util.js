@@ -247,42 +247,6 @@
     };
 
 
-    if (!_.isObject(window.JsonStringifySafe))
-        console.warn('"json-stringify-safe" dependency not satisfied');
-
-    var generateTree = util.generateTree = function(idKey, parentIdKey, childrenKey, nameKey) {
-        idKey == null && (idKey = 'id');
-        parentIdKey == null && (parentIdKey = 'parentId');
-        childrenKey == null && (childrenKey = 'children');
-        nameKey == null && (nameKey = 'name');
-
-        var MAX_ITEMS = 101;
-
-        var randoms = _.times(31, function() { return _.random(MAX_ITEMS) });
-
-        var arr = _.shuffle(_.times(MAX_ITEMS, function(i) {
-            var r = _.sample(randoms);
-            var weightedRandom = _.sample(_(5).times(_.constant(r)).push(null).v);
-
-            var obj = {};
-
-            obj[idKey] = i;
-            obj[parentIdKey] = weightedRandom;
-            //obj[nameKey] = 'Foo-' + i;
-            obj[nameKey] = lorem(1, _.random(3, 20)); // Example
-            obj.awesome = _.sample([true, false]); // Extra data example
-            obj.order = visuallyRandomNumber(); // Extra data example
-
-            return obj;
-        }));
-
-        // Remove circular references:
-        arr = JSON.parse(JsonStringifySafe.stringify(arr, null, null, function() { }));
-
-        return flat2tree(arr, idKey, parentIdKey, childrenKey);
-    };
-
-
     var getPath = util.getPath = function(obj, path) {
         ensure.plainObject(obj);
         ensure.array(path);
