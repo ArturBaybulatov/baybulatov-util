@@ -9,11 +9,29 @@
 
 
     var util = window.util = {};
-    util._version = 'dev';
+    util._version = '0.4.0';
 
 
     var NoSuchPathError = util.NoSuchPathError = function(msg) { this.message = msg };
     NoSuchPathError.prototype = Object.create(Error.prototype);
+
+
+    var curry = util.curry = function(fn, arity) {
+        arity = arity || fn.length
+
+        return function f1() {
+            var args = Array.prototype.slice.call(arguments, 0)
+
+            if (args.length >= arity) {
+                return fn.apply(null, args)
+            } else {
+                return function f2() {
+                    var args2 = Array.prototype.slice.call(arguments, 0)
+                    return f1.apply(null, args.concat(args2))
+                }
+            }
+        }
+    };
 
 
     var formatDate = util.formatDate = function(date) {
