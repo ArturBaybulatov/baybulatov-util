@@ -200,6 +200,24 @@
     };
 
 
+    var addBemModifier = util.addBemModifier = function(cls, modifier) {
+        ensure.nonEmptyString(cls, modifier);
+        ensure(hasNoWhitespaces(cls), 'String with no whitespaces expected');
+        ensure(hasNoWhitespaces(modifier), 'String with no whitespaces expected');
+
+        return cls + ' ' + cls + '--' + modifier;
+    };
+
+
+    var hasNoWhitespaces = util.hasNoWhitespaces = function(s, strict) {
+        ensure.string(s);
+        ensure.maybe.boolean(strict);
+
+        if (!strict) s = s.trim();
+        return s.split(/\s/).length === 1;
+    };
+
+
     var isNonEmptyArray = util.isNonEmptyArray = function(val) {
         return Array.isArray(val) && val.length !== 0;
     };
