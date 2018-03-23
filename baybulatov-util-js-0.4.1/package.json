@@ -1,0 +1,15 @@
+{
+  "name": "baybulatov-util-js",
+  "version": "0.4.1",
+  "main": "baybulatov-util.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArturBaybulatov/baybulatov-util-js.git"
+  },
+  "author": "NeuracorrCommon@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArturBaybulatov/baybulatov-util-js/issues"
+  },
+  "homepage": "https://github.com/ArturBaybulatov/baybulatov-util-js#readme"
+}

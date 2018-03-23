@@ -1,11 +1,16 @@
 (function() {
     'use strict';
 
+
+    var __ = undefined;
+
     var toString = Function.call.bind({}.toString);
     var slice = Function.call.bind([].slice);
 
+
     var util = window.util = {};
-    util._version = 'dev';
+    util._version = '0.4.1';
+
 
     var NoSuchPathError = util.NoSuchPathError = function(msg) { this.message = msg };
     NoSuchPathError.prototype = Object.create(Error.prototype);
