@@ -256,12 +256,12 @@
         ensure.nonNegativeInteger(depth);
         ensure.maybe.nonEmptyString(nameKey, childrenKey);
 
-        if (!util.isNonEmptyString(nameKey)) nameKey = 'name';
-        if (!util.isNonEmptyString(childrenKey)) childrenKey = 'children';
+        if (!isNonEmptyString(nameKey)) nameKey = 'name';
+        if (!isNonEmptyString(childrenKey)) childrenKey = 'children';
 
         return _.times(_.random(3, 6), function() {
             var obj = {};
-            obj[nameKey] = util.lorem(1, _.random(1, 4));
+            obj[nameKey] = lorem(1, _.random(1, 4));
 
             if (_.sample([true, false]) && depth - 1 !== 0)
                 obj[childrenKey] = generateTree(depth - 1, nameKey, childrenKey);
