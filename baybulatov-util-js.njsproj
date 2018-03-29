@@ -30,6 +30,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="baybulatov-jq-util-0.1.0\" />
     <Folder Include="baybulatov-util-js-0.0.3\" />
     <Folder Include="baybulatov-util-js-0.2.3\" />
     <Folder Include="baybulatov-util-js-0.3.0\" />
@@ -37,9 +38,11 @@
     <Folder Include="baybulatov-util-js-0.4.1\" />
     <Folder Include="baybulatov-util-js-0.5.0\" />
     <Folder Include="baybulatov-util-js-dev\" />
+    <Folder Include="baybulatov-jq-util-dev\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="baybulatov-jq-util-0.1.0\baybulatov-jq-util.css" />
     <Content Include="baybulatov-util-js-0.0.3\README.md" />
     <Content Include="baybulatov-util-js-0.2.3\baybulatov-util.css" />
     <Content Include="baybulatov-util-js-0.2.3\package.json" />
@@ -56,12 +59,13 @@
     <Content Include="baybulatov-util-js-0.5.0\baybulatov-util.css" />
     <Content Include="baybulatov-util-js-0.5.0\package.json" />
     <Content Include="baybulatov-util-js-0.5.0\README.md" />
-    <Content Include="baybulatov-util-js-dev\baybulatov-util.css" />
     <Content Include="baybulatov-util-js-dev\package.json" />
     <Content Include="baybulatov-util-js-dev\README.md" />
+    <Content Include="baybulatov-jq-util-dev\baybulatov-jq-util.css" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="baybulatov-jq-util-0.1.0\baybulatov-jq-util.js" />
     <Compile Include="baybulatov-util-js-0.0.3\baybulatov-util.js" />
     <Compile Include="baybulatov-util-js-0.2.3\baybulatov-util.js" />
     <Compile Include="baybulatov-util-js-0.3.0\baybulatov-util.js" />
@@ -69,6 +73,7 @@
     <Compile Include="baybulatov-util-js-0.4.1\baybulatov-util.js" />
     <Compile Include="baybulatov-util-js-0.5.0\baybulatov-util.js" />
     <Compile Include="baybulatov-util-js-dev\baybulatov-util.js" />
+    <Compile Include="baybulatov-jq-util-dev\baybulatov-jq-util.js" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

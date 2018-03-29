@@ -1,25 +1,29 @@
 # baybulatov-util-js
 
-## Installation
+## npm
 
-### npm
+https://www.npmjs.com/package/baybulatov-util-js
 
 ```
 npm install baybulatov-util-js
 ```
 
-### Direct links
+## Direct links to files
 
-```
-<link href="https://unpkg.com/baybulatov-util-js@latest/baybulatov-util.css" rel="stylesheet">
-<script src="https://unpkg.com/baybulatov-util-js@latest/baybulatov-util.js"></script>
-```
+https://unpkg.com/baybulatov-util-js/
 
 ## Development and publishing
 
+Update the version in `package.json` manually or using:
+
 ```
 npm version <update_type>
-npm publish
 ```
 
 where `update_type` is one of the semantic versioning release types, `patch`, `minor`, or `major`
+
+And then:
+
+```
+npm publish
+```
