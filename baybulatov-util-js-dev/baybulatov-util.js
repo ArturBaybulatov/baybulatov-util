@@ -12,6 +12,13 @@
 
 
     var formatDate = util.formatDate = function(date) {
+        ensure.date(date);
+        return [date.getFullYear(), pad(date.getMonth() + 1), pad(date.getDate())].join('-');
+    };
+
+
+    var formatDateRu = util.formatDateRu = function(date) {
+        ensure.date(date);
         return [pad(date.getDate()), pad(date.getMonth() + 1), date.getFullYear()].join('.');
     };
 
@@ -40,6 +47,16 @@
             return false;
 
         return str1.trim().toUpperCase() === str2.trim().toUpperCase();
+    };
+
+
+    var isSamePath = util.isSamePath = function(p1, p2) {
+        ensure.string(p1, p2);
+
+        p1 = p1.trim().replace(/\/$/, '');
+        p2 = p2.trim().replace(/\/$/, '');
+
+        return isSameStringI(p1, p2);
     };
 
 
@@ -153,8 +170,8 @@
     };
 
 
-    var dateValid = util.dateValid = function(date) {
-        return isNumber(date.getTime());
+    var isDate = util.isDate = function(val) {
+        return val instanceof Date && isNumber(val.getTime());
     };
 
 
@@ -426,6 +443,7 @@
     _ensurify('nonEmptyArray', isNonEmptyArray, 'Non-empty array');
     _ensurify('jqElement', isJqElement, 'jQuery element');
     _ensurify('nonEmptyJqCollection', isNonEmptyJqCollection, 'Non-empty jQuery collection');
+    _ensurify('date', isDate, 'Valid date');
 
     function _ensurify(identifier, predicate, type) {
         ensure(isNonEmptyString(identifier), 'Non-empty string expected');

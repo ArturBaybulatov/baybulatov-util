@@ -8,51 +8,57 @@
     var ensure = util.ensure;
 
 
-    var popup = kendoUtil.popup = function(title, $popup, args) {
+    var popup = kendoUtil.popup = function(title, $popup, callbacks, extraOptions) {
         ensure.nonEmptyString(title);
         ensure.jqElement($popup);
-        ensure.maybe.plainObject(args);
+        ensure.maybe.plainObject(callbacks, extraOptions);
 
-        if (!_.isPlainObject(args))
-            args = {};
+        if (!_.isPlainObject(callbacks))
+            callbacks = {};
 
-        ensure.maybe.function(args.open, args.ok, args.close);
+        ensure.maybe.function(callbacks.open, callbacks.ok, callbacks.close);
 
         var options = {
+            visible: true,
             title: title,
             content: $popup,
             minWidth: 400,
+            maxWidth: 800,
+            maxHeight: 600,
         };
 
-        if (typeof args.open === 'function')
-            options.open = args.open;
+        if (typeof callbacks.open === 'function')
+            options.open = callbacks.open;
 
         options.close = function() {
-            if (typeof args.close === 'function')
-                args.close();
+            if (typeof callbacks.close === 'function')
+                callbacks.close();
 
             this.destroy();
         };
 
-        var actions = [];
+        options.actions = [
+            {
+                text: 'OK',
+                primary: true,
 
-        actions.push({
-            text: 'OK',
-            primary: true,
+                action: function(evt) {
+                    var kDialog = evt.sender;
 
-            action: function() {
-                if (typeof args.ok === 'function')
-                    args.ok();
-
-                return false;
+                    if (typeof callbacks.ok === 'function') {
+                        callbacks.ok.call(kDialog);
+                        return false;
+                    } else {
+                        g.kDialog = kDialog;
+                        //kDialog.destroy();
+                        return false; // Tmp
+                    }
+                },
             },
-        });
 
-        actions.push({ text: 'Close' });
+            { text: 'Close' },
+        ];
 
-        if (util.isNonEmptyArray(actions))
-            options.actions = actions;
-
-        $('<div>').kendoDialog(options).data('kendoDialog').open();
+        return $('<div>').kendoDialog(Object.assign(options, extraOptions)).data('kendoDialog');
     };
 }());
