@@ -45,6 +45,9 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="baybulatov-jq-util-0.1.0\baybulatov-jq-util.css" />
+    <Content Include="baybulatov-kendo-util-dev\baybulatov-kendo-util.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="baybulatov-util-js-0.0.3\README.md" />
     <Content Include="baybulatov-util-js-0.2.3\baybulatov-util.css" />
     <Content Include="baybulatov-util-js-0.2.3\package.json" />
