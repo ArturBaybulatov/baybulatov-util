@@ -496,13 +496,21 @@
 
 
     var responseToError = util.responseToError = function(res) {
-        console.warn('Deprecated?');
-
-        var msg = res.status + ' ' + res.statusText;
-
-        if (isNonEmptyString(res.responseText))
-            msg += '\n\n' + res.responseText.split('\n', 5).join('\n');
-
-        throw new Error(msg);
+        ensure.object(res);
+        throw new Error(res.status + ' ' + res.statusText);
     };
+
+
+    var $body = $('body');
+
+    var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
+    $body.append($overlay.hide());
+
+    var showOverlay = util.showOverlay = function(msg) {
+        ensure.nonEmptyString(msg);
+        $overlay.find('[js-text]').text(msg);
+        $overlay.stop().fadeIn();
+    };
+
+    var hideOverlay = util.hideOverlay = function() { $overlay.stop().fadeOut() };
 }());

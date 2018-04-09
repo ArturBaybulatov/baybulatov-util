@@ -64,6 +64,9 @@
     <Content Include="baybulatov-util-js-0.5.0\baybulatov-util.css" />
     <Content Include="baybulatov-util-js-0.5.0\package.json" />
     <Content Include="baybulatov-util-js-0.5.0\README.md" />
+    <Content Include="baybulatov-util-js-dev\baybulatov-util.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="baybulatov-util-js-dev\package.json" />
     <Content Include="baybulatov-util-js-dev\README.md" />
     <Content Include="baybulatov-jq-util-dev\baybulatov-jq-util.css" />
