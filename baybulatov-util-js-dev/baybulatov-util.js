@@ -506,9 +506,15 @@
     var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
     $body.append($overlay.hide());
 
-    var showOverlay = util.showOverlay = function(msg) {
-        ensure.nonEmptyString(msg);
-        $overlay.find('[js-text]').text(msg);
+    var showOverlay = util.showOverlay = function(str, isHtml) {
+        ensure.nonEmptyString(str);
+        ensure.maybe.boolean(isHtml);
+
+        if (isHtml)
+            $overlay.find('[js-text]').html(str);
+        else
+            $overlay.find('[js-text]').text(str);
+
         $overlay.stop().fadeIn();
     };
 
