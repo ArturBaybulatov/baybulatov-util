@@ -501,6 +501,22 @@
     };
 
 
+    var uriEncodeObject = util.uriEncodeObject = function(obj) {
+        ensure.plainObject(obj);
+        return encodeURIComponent(JSON.stringify(obj));
+    };
+
+
+    var uriDecodeObject = util.uriDecodeObject = function(str) {
+        ensure.string(str);
+        str = str.replace(/^#/, '');
+        var json = decodeURIComponent(str);
+
+        try { return JSON.parse(json) }
+        catch (err) { return {} }
+    };
+
+
     var $body = $('body');
 
     var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
