@@ -181,6 +181,16 @@
     };
 
 
+    var isPositiveNumber = util.isPositiveNumber = function(val) {
+        return isNumber(val) && val > 0;
+    };
+
+
+    var isNonNegativeNumber = util.isNonNegativeNumber = function(val) {
+        return isNumber(val) && val >= 0;
+    };
+
+
     var isPositiveInteger = util.isPositiveInteger = function(val) {
         return Number.isInteger(val) && val > 0;
     };
@@ -346,21 +356,21 @@
         if (sentenceCount == null)
             sentenceCount = _.random(1, 5);
 
-        if (wordCount == null)
-            wordCount = _.random(5, 30);
+        //var vocab = [
+        //    'a ac adipiscing amet ante arcu at auctor augue bibendum commodo condimentum consectetur consequat convallis curabitur',
+        //    'cursus diam dictum dignissim dolor donec duis efficitur eget eleifend elit enim erat et eu ex facilisis faucibus feugiat',
+        //    'finibus gravida iaculis id imperdiet in integer ipsum lacinia lacus laoreet lectus leo libero ligula lobortis lorem',
+        //    'luctus maecenas mauris metus mi mollis morbi nam nec neque nisi non nulla nullam nunc odio orci ornare pellentesque',
+        //    'pharetra phasellus porta porttitor posuere pretium proin pulvinar purus quam quis rhoncus rutrum sapien sed sem semper',
+        //    'sit sollicitudin tempor tempus tincidunt tortor turpis ullamcorper ultricies ut varius vehicula vel velit vestibulum',
+        //    'vitae viverra volutpat vulputate',
+        //].join(' ').split(' ');
 
-        var vocab = [
-            'a ac adipiscing amet ante arcu at auctor augue bibendum commodo condimentum consectetur consequat convallis curabitur',
-            'cursus diam dictum dignissim dolor donec duis efficitur eget eleifend elit enim erat et eu ex facilisis faucibus feugiat',
-            'finibus gravida iaculis id imperdiet in integer ipsum lacinia lacus laoreet lectus leo libero ligula lobortis lorem',
-            'luctus maecenas mauris metus mi mollis morbi nam nec neque nisi non nulla nullam nunc odio orci ornare pellentesque',
-            'pharetra phasellus porta porttitor posuere pretium proin pulvinar purus quam quis rhoncus rutrum sapien sed sem semper',
-            'sit sollicitudin tempor tempus tincidunt tortor turpis ullamcorper ultricies ut varius vehicula vel velit vestibulum',
-            'vitae viverra volutpat vulputate',
-        ].join(' ').split(' ');
+        var vocab = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'.split(''); // Debug
 
         return _.times(sentenceCount, function() {
-            return _(vocab).sampleSize(wordCount).join(' ').capitalize().v;
+            var currentWordCount = wordCount == null ? _.random(5, 30) : wordCount;
+            return _(vocab).sampleSize(currentWordCount).join(' ').capitalize().v;
         }).join('. ');
     };
 
@@ -433,6 +443,8 @@
     _ensurify('jqCollection', function(val) { return val instanceof jQuery }, 'jQuery collection');
     _ensurify('nonEmptyString', isNonEmptyString, 'Non-empty string');
     _ensurify('number', isNumber, 'Number');
+    _ensurify('positiveNumber', isPositiveNumber, 'Positive number');
+    _ensurify('nonNegativeNumber', isNonNegativeNumber, 'Non-negative number');
     _ensurify('integer', Number.isInteger, 'Integer');
     _ensurify('positiveInteger', isPositiveInteger, 'Positive integer');
     _ensurify('nonNegativeInteger', isNonNegativeInteger, 'Non-negative integer');
@@ -501,13 +513,12 @@
     };
 
 
-    var uriEncodeObject = util.uriEncodeObject = function(obj) {
-        ensure.plainObject(obj);
-        return encodeURIComponent(JSON.stringify(obj));
+    var uriEncodeJson = util.uriEncodeJson = function(val) {
+        return encodeURIComponent(JSON.stringify(val));
     };
 
 
-    var uriDecodeObject = util.uriDecodeObject = function(str) {
+    var uriDecodeJson = util.uriDecodeJson = function(str) {
         ensure.string(str);
         str = str.replace(/^#/, '');
         var json = decodeURIComponent(str);
