@@ -503,6 +503,7 @@
         return function(err) {
             toastr.error(err.message, msg);
             console.error(err);
+            throw err;
         };
     };
 
