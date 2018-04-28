@@ -201,6 +201,12 @@
     };
 
 
+    var isHexColorString = util.isHexColorString = function(val) {
+        ensure.nonEmptyString(val);
+        return /^#[0-9a-f]{6}$/i.test(val);
+    };
+
+
     /** Проверяет, является ли значение `val` реальным числом или строкой, его представляющей */
     var isNumeric = util.isNumeric = function(val) {
         if (isNumber(val))
@@ -456,6 +462,7 @@
     _ensurify('jqElement', isJqElement, 'jQuery element');
     _ensurify('nonEmptyJqCollection', isNonEmptyJqCollection, 'Non-empty jQuery collection');
     _ensurify('date', isDate, 'Valid date');
+    _ensurify('hexColorString', isHexColorString, 'Hex color string');
 
     function _ensurify(identifier, predicate, type) {
         ensure(isNonEmptyString(identifier), 'Non-empty string expected');
@@ -527,6 +534,36 @@
         try { return JSON.parse(json) }
         catch (err) { return {} }
     };
+
+
+    var lightenColor = util.lightenColor = function(hexColorStr, percentage) {
+        ensure.hexColorString(hexColorStr);
+        ensure.number(percentage);
+        ensure(percentage >= -1 && percentage <= 1, 'A percentage between -1 and 1 expected');
+
+        var amount = ensure.integer(Math.round(255 * percentage));
+
+        hexColorStr = hexColorStr.slice(1); // Strip the hash symbol
+
+        var num = parseInt(hexColorStr, 16);
+
+        var r = (num >> 16) + amount;
+
+        if (r > 255) r = 255;
+        else if  (r < 0) r = 0;
+
+        var b = ((num >> 8) & 0x00ff) + amount;
+
+        if (b > 255) b = 255;
+        else if  (b < 0) b = 0;
+
+        var g = (num & 0x0000ff) + amount;
+
+        if (g > 255) g = 255;
+        else if  (g < 0) g = 0;
+
+        return '#' + ('00000' + (g | (b << 8) | (r << 16)).toString(16)).substr(-6);
+    }
 
 
     var $body = $('body');
