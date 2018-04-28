@@ -24,7 +24,7 @@
 
 
     var formatTime = util.formatTime = function(date) { // There's no JavaScript "time" type
-        return [pad(date.getHours()), pad(date.getMinutes())].join(':');
+        return [pad(date.getHours()), pad(date.getMinutes()), pad(date.getSeconds())].join(':');
     };
 
 
