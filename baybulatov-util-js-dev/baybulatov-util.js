@@ -530,9 +530,7 @@
         ensure.string(str);
         str = str.replace(/^#/, '');
         var json = decodeURIComponent(str);
-
-        try { return JSON.parse(json) }
-        catch (err) { return {} }
+        try { return JSON.parse(json) } catch (err) {}
     };
 
 
