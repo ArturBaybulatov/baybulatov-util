@@ -225,6 +225,8 @@
 
 
     var fromNumeric = util.fromNumeric = function(val, defaultVal) {
+        console.warn('Deprecated in favor of `const result = util.isNumeric(val) ? Number(val) : defaultVal`?');
+
         if (arguments.length <= 1)
             defaultVal = null;
 
