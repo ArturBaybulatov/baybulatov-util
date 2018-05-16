@@ -41,6 +41,7 @@
     <Folder Include="baybulatov-util-js-0.5.0\" />
     <Folder Include="baybulatov-util-js-dev\" />
     <Folder Include="baybulatov-jq-util-dev\" />
+    <Folder Include="dev-colors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -70,6 +71,7 @@
     <Content Include="baybulatov-util-js-dev\package.json" />
     <Content Include="baybulatov-util-js-dev\README.md" />
     <Content Include="baybulatov-jq-util-dev\baybulatov-jq-util.css" />
+    <Content Include="dev-colors\dev-colors.css" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
