@@ -35,13 +35,12 @@
     };
 
 
-    var popup = jqUtil.popup = function(title, $popup, args) {
-        ensure.nonEmptyString(title);
+    var popup = jqUtil.popup = function(title, $popup, args, extraOptions) {
+        ensure.maybe.nonEmptyString(title);
         ensure.jqElement($popup);
-        ensure.maybe.plainObject(args);
+        ensure.maybe.plainObject(args, extraOptions);
 
-        if (!_.isPlainObject(args))
-            args = {};
+        if (!_.isPlainObject(args)) args = {};
 
         ensure.maybe.function(args.open, args.ok, args.close);
 
@@ -53,25 +52,17 @@
             width: 'auto',
         };
 
-        if (typeof args.open === 'function')
-            options.open = args.open;
+        if (typeof args.open === 'function') options.open = args.open;
 
-        if (typeof args.close === 'function')
-            options.close = function() { args.close(); $popup.dialog('destroy') };
-        else
-            options.close = function() { $popup.dialog('destroy') };
+        if (typeof args.close === 'function') options.close = function() { args.close(); $popup.dialog('destroy') };
+        else options.close = function() { $popup.dialog('destroy') };
 
         var buttons = [];
-
-        if (typeof args.ok === 'function')
-            buttons.push({ text: 'OK', click: args.ok, attr: { 'js-ok-btn': '' } });
-
+        if (typeof args.ok === 'function') buttons.push({ text: 'OK', click: args.ok, attr: { 'js-ok-btn': '' } });
         buttons.push({ text: 'Закрыть', click: function() { $popup.dialog('close') } });
+        if (util.isNonEmptyArray(buttons)) options.buttons = buttons;
 
-        if (util.isNonEmptyArray(buttons))
-            options.buttons = buttons;
-
-        $popup.dialog(options);
+        $popup.dialog(Object.assign(options, extraOptions));
     };
 
 
