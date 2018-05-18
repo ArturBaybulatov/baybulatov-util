@@ -6,14 +6,17 @@
     var ensure = util.ensure;
 
 
-    var popup = kendoUtil.popup = function($popup, extraOptions, callbacks) {
+    var popup = kendoUtil.popup = function(title, $popup, callbacks) {
+        ensure.nonEmptyString(title);
         ensure.jqElement($popup);
-        ensure.maybe.plainObject(extraOptions, callbacks);
+        ensure.maybe.plainObject(callbacks);
 
-        if (!_.isPlainObject(callbacks)) callbacks = {}; // To prevent reference errors
+        if (!_.isPlainObject(callbacks))
+            callbacks = {}; // To prevent reference errors
 
         var options = {
             visible: false,
+            title: title,
             content: $popup,
             minWidth: 400,
             maxWidth: 800,
@@ -34,14 +37,17 @@
 
         options.actions.push({ text: 'Close' });
 
-        if (typeof callbacks.open === 'function') options.open = callbacks.open.bind(kDialog, destroy);
+        if (typeof callbacks.open === 'function')
+            options.open = callbacks.open.bind(kDialog, destroy);
 
         options.close = function() {
-            if (typeof callbacks.close === 'function') callbacks.close.call(kDialog);
+            if (typeof callbacks.close === 'function')
+                callbacks.close.call(kDialog);
+
             this.destroy();
         };
 
-        kDialog.setOptions(Object.assign(options, extraOptions));
+        kDialog.setOptions(options);
         kDialog.open();
     };
 

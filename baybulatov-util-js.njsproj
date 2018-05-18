@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include="baybulatov-kendo-util-0.1.0\" />
     <Folder Include="baybulatov-jq-util-0.1.0\" />
+    <Folder Include="baybulatov-kendo-util-0.2.0\" />
     <Folder Include="baybulatov-kendo-util-dev\" />
     <Folder Include="baybulatov-util-js-0.0.3\" />
     <Folder Include="baybulatov-util-js-0.2.3\" />
@@ -42,10 +43,13 @@
     <Folder Include="baybulatov-util-js-dev\" />
     <Folder Include="baybulatov-jq-util-dev\" />
     <Folder Include="dev-colors\" />
+    <Folder Include="baybulatov-kendo-util-0.1.1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="baybulatov-jq-util-0.1.0\baybulatov-jq-util.css" />
+    <Content Include="baybulatov-kendo-util-0.1.1\baybulatov-kendo-util.css" />
+    <Content Include="baybulatov-kendo-util-0.2.0\baybulatov-kendo-util.css" />
     <Content Include="baybulatov-kendo-util-dev\baybulatov-kendo-util.css">
       <SubType>Code</SubType>
     </Content>
@@ -77,6 +81,8 @@
   <ItemGroup>
     <Compile Include="baybulatov-kendo-util-0.1.0\baybulatov-kendo-util.js" />
     <Compile Include="baybulatov-jq-util-0.1.0\baybulatov-jq-util.js" />
+    <Compile Include="baybulatov-kendo-util-0.1.1\baybulatov-kendo-util.js" />
+    <Compile Include="baybulatov-kendo-util-0.2.0\baybulatov-kendo-util.js" />
     <Compile Include="baybulatov-kendo-util-dev\baybulatov-kendo-util.js" />
     <Compile Include="baybulatov-util-js-0.0.3\baybulatov-util.js" />
     <Compile Include="baybulatov-util-js-0.2.3\baybulatov-util.js" />
