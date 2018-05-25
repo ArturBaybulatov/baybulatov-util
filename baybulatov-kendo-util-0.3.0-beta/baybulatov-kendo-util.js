@@ -6,43 +6,45 @@
     var ensure = util.ensure;
 
 
-    var popup = kendoUtil.popup = function($popup, extraOptions, callbacks) {
-        ensure.jqElement($popup);
-        ensure.maybe.plainObject(extraOptions, callbacks);
+    var popup = kendoUtil.popup = function(extraOptions, otherOpts) {
+        ensure.maybe.plainObject(extraOptions, otherOpts);
 
-        if (!_.isPlainObject(callbacks)) callbacks = {}; // To prevent reference errors
+        if (!_.isPlainObject(otherOpts)) otherOpts = {}; // To prevent reference errors
 
         var options = {
             visible: false,
-            content: $popup,
             minWidth: 400,
             maxWidth: 800,
             maxHeight: 600,
-            actions: [],
+
+            actions: [{
+                text: util.isNonEmptyString(otherOpts.closeBtnText) ? otherOpts.closeBtnText : 'Close',
+                _isCloseBtn: true,
+            }],
         };
 
         var kDialog = $('<div>').kendoDialog(options).data('kendoDialog');
         var destroy = function() { kDialog.destroy(); $('.k-overlay').remove() };
 
-        if (typeof callbacks.ok === 'function') {
-            options.actions.push({
-                text: 'OK',
+        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kDialog, destroy);
+
+        if (typeof otherOpts.ok === 'function') {
+            options.actions.unshift({
+                text: util.isNonEmptyString(otherOpts.okBtnText) ? otherOpts.okBtnText : 'OK',
                 primary: true,
-                action: function() { callbacks.ok.call(kDialog, destroy); return false },
+                action: function() { otherOpts.ok.call(kDialog, destroy); return false },
+                _isOkBtn: true,
             });
         }
 
-        options.actions.push({ text: 'Close' });
-
-        if (typeof callbacks.open === 'function') options.open = callbacks.open.bind(kDialog, destroy);
-
         options.close = function() {
-            if (typeof callbacks.close === 'function') callbacks.close.call(kDialog);
+            if (typeof otherOpts.close === 'function') otherOpts.close.call(kDialog);
             this.destroy();
         };
 
         kDialog.setOptions(Object.assign(options, extraOptions));
-        kDialog.open();
+
+        return kDialog;
     };
 
 

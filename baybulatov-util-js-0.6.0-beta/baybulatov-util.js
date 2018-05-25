@@ -50,6 +50,10 @@
 
 
     var isSamePath = util.isSamePath = function(p1, p2) {
+        console.warn('Deprecated?');
+
+        // Use `new URL(relativePath, location.href).pathname === location.pathname`
+
         ensure.string(p1, p2);
 
         p1 = p1.trim().replace(/\/$/, '');
