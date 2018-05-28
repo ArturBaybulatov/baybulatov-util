@@ -54,6 +54,9 @@
 
         // Use `new URL(relativePath, location.href).pathname === location.pathname`
 
+        // Or use: `var a = document.createElement('a'); a.href = 'http://xxx/'; var relPath = '../about/'; a.pathname = `${location.pathname}${relPath}`; a.pathname === location.pathname`
+        // IE requires a hack: `a.pathname.replace(/^\/?/, '/') === location.pathname`
+
         ensure.string(p1, p2);
 
         p1 = p1.trim().replace(/\/$/, '');
