@@ -1,33 +1,35 @@
-.a { background-color: #ffbfbf !important } .b { background-color: #ffe1bf !important }
-.c { background-color: #fbffbf !important } .d { background-color: #bfffc8 !important }
-.e { background-color: #bff2ff !important } .f { background-color: #bfd0ff !important }
-.g { background-color: #d0bfff !important } .h { background-color: #ffbfea !important }
-.i { background-color: #ff8080 !important } .j { background-color: #ffc480 !important }
-.k { background-color: #f6ff80 !important } .l { background-color: #b2ff80 !important }
-.m { background-color: #80a2ff !important } .n { background-color: #a280ff !important }
-.o { background-color: #ff80d5 !important } .p { background-color: #ff4040 !important }
-.q { background-color: #40ff59 !important } .r { background-color: #40ffbf !important }
-.s { background-color: #40d9ff !important } .t { background-color: #7340ff !important }
-.u { background-color: #d940ff !important } .v { background-color: #ff8800 !important }
-.w { background-color: #eeff00 !important } .x { background-color: #ff00aa !important }
-.y { background-color: #999999 !important } .z { background-color: #997373 !important }
+[a], .a { background-color: #ffbfbf !important } [b], .b { background-color: #ffe1bf !important }
+[c], .c { background-color: #fbffbf !important } [d], .d { background-color: #bfffc8 !important }
+[e], .e { background-color: #bff2ff !important } [f], .f { background-color: #bfd0ff !important }
+[g], .g { background-color: #d0bfff !important } [h], .h { background-color: #ffbfea !important }
+[i], .i { background-color: #ff8080 !important } [j], .j { background-color: #ffc480 !important }
+[k], .k { background-color: #f6ff80 !important } [l], .l { background-color: #b2ff80 !important }
+[m], .m { background-color: #80a2ff !important } [n], .n { background-color: #a280ff !important }
+[o], .o { background-color: #ff80d5 !important } [p], .p { background-color: #ff4040 !important }
+[q], .q { background-color: #40ff59 !important } [r], .r { background-color: #40ffbf !important }
+[s], .s { background-color: #40d9ff !important } [t], .t { background-color: #7340ff !important }
+[u], .u { background-color: #d940ff !important } [v], .v { background-color: #ff8800 !important }
+[w], .w { background-color: #eeff00 !important } [x], .x { background-color: #ff00aa !important }
+[y], .y { background-color: #999999 !important } [z], .z { background-color: #997373 !important }
 
-.aa,.bb,.cc,.dd,.ee,.ff,.gg,.hh,.ii,.jj,.kk,.ll,.mm,
-.nn,.oo,.pp,.qq,.rr,.ss,.tt,.uu,.vv,.ww,.xx,.yy,.zz {
+[aa], [bb], [cc], [dd], [ee], [ff], [gg], [hh], [ii], [jj], [kk], [ll], [mm],
+[nn], [oo], [pp], [qq], [rr], [ss], [tt], [uu], [vv], [ww], [xx], [yy], [zz],
+.aa, .bb, .cc, .dd, .ee, .ff, .gg, .hh, .ii, .jj, .kk, .ll, .mm,
+.nn, .oo, .pp, .qq, .rr, .ss, .tt, .uu, .vv, .ww, .xx, .yy, .zz {
     outline-style: solid !important;
     outline-width: 2px !important;
 }
 
-.aa { outline-color: #ffbfbf !important } .bb { outline-color: #ffe1bf !important }
-.cc { outline-color: #fbffbf !important } .dd { outline-color: #bfffc8 !important }
-.ee { outline-color: #bff2ff !important } .ff { outline-color: #bfd0ff !important }
-.gg { outline-color: #d0bfff !important } .hh { outline-color: #ffbfea !important }
-.ii { outline-color: #ff8080 !important } .jj { outline-color: #ffc480 !important }
-.kk { outline-color: #f6ff80 !important } .ll { outline-color: #b2ff80 !important }
-.mm { outline-color: #80a2ff !important } .nn { outline-color: #a280ff !important }
-.oo { outline-color: #ff80d5 !important } .pp { outline-color: #ff4040 !important }
-.qq { outline-color: #40ff59 !important } .rr { outline-color: #40ffbf !important }
-.ss { outline-color: #40d9ff !important } .tt { outline-color: #7340ff !important }
-.uu { outline-color: #d940ff !important } .vv { outline-color: #ff8800 !important }
-.ww { outline-color: #eeff00 !important } .xx { outline-color: #ff00aa !important }
-.yy { outline-color: #999999 !important } .zz { outline-color: #997373 !important }
+[aa], .aa { outline-color: #ffbfbf !important } [bb], .bb { outline-color: #ffe1bf !important }
+[cc], .cc { outline-color: #fbffbf !important } [dd], .dd { outline-color: #bfffc8 !important }
+[ee], .ee { outline-color: #bff2ff !important } [ff], .ff { outline-color: #bfd0ff !important }
+[gg], .gg { outline-color: #d0bfff !important } [hh], .hh { outline-color: #ffbfea !important }
+[ii], .ii { outline-color: #ff8080 !important } [jj], .jj { outline-color: #ffc480 !important }
+[kk], .kk { outline-color: #f6ff80 !important } [ll], .ll { outline-color: #b2ff80 !important }
+[mm], .mm { outline-color: #80a2ff !important } [nn], .nn { outline-color: #a280ff !important }
+[oo], .oo { outline-color: #ff80d5 !important } [pp], .pp { outline-color: #ff4040 !important }
+[qq], .qq { outline-color: #40ff59 !important } [rr], .rr { outline-color: #40ffbf !important }
+[ss], .ss { outline-color: #40d9ff !important } [tt], .tt { outline-color: #7340ff !important }
+[uu], .uu { outline-color: #d940ff !important } [vv], .vv { outline-color: #ff8800 !important }
+[ww], .ww { outline-color: #eeff00 !important } [xx], .xx { outline-color: #ff00aa !important }
+[yy], .yy { outline-color: #999999 !important } [zz], .zz { outline-color: #997373 !important }
