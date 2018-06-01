@@ -4,10 +4,15 @@
     var toString = Function.call.bind({}.toString);
     var slice = Function.call.bind([].slice);
 
+
     var util = window.util = {};
+
 
     var NoSuchPathError = util.NoSuchPathError = function(msg) { this.message = msg };
     NoSuchPathError.prototype = Object.create(Error.prototype);
+
+    var HttpAuthError = util.HttpAuthError = function(msg) { this.message = msg };
+    HttpAuthError.prototype = Object.create(Error.prototype);
 
 
     var formatDate = util.formatDate = function(date) {
@@ -516,6 +521,7 @@
         ensure.nonEmptyString(msg);
 
         return function(err) {
+            if (err instanceof util.HttpAuthError) msg = 'Authentication problem. Try logging in (again)';
             toastr.error(err.message, msg);
             console.error(err);
             throw err;
@@ -525,7 +531,11 @@
 
     var responseToError = util.responseToError = function(res) {
         ensure.object(res);
-        throw new Error(res.status + ' ' + res.statusText);
+
+        var msg = res.status + ' ' + res.statusText;
+        var err = res.status === 401 ? new HttpAuthError(msg) : new Error(msg);
+
+        throw err;
     };
 
 
