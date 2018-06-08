@@ -533,6 +533,9 @@
         ensure.object(res);
 
         var msg = res.status + ' ' + res.statusText;
+
+        if (isNonEmptyString(res.responseText)) msg += ': ' + res.responseText;
+
         var err = res.status === 401 ? new HttpAuthError(msg) : new Error(msg);
 
         throw err;
