@@ -16,24 +16,20 @@
             minWidth: 400,
             maxWidth: 800,
             maxHeight: 600,
-
-            actions: [{
-                text: util.isNonEmptyString(otherOpts.closeBtnText) ? otherOpts.closeBtnText : 'Close',
-                _isCloseBtn: true,
-            }],
+            actions: [{ text: util.isNonEmptyString(otherOpts.closeBtnText) ? otherOpts.closeBtnText : 'Close' }],
         };
 
         var kDialog = $('<div>').kendoDialog(options).data('kendoDialog');
-        var destroy = function() { kDialog.destroy(); $('.k-overlay').remove() };
+        kDialog.__destroy = function() { kDialog.destroy(); $('.k-overlay').remove() };
 
-        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kDialog, destroy);
+        // TODO: Get rid of the second argument (`kDialog.__destroy`) in the next version:
+        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kDialog, kDialog.__destroy);
 
         if (typeof otherOpts.ok === 'function') {
             options.actions.unshift({
                 text: util.isNonEmptyString(otherOpts.okBtnText) ? otherOpts.okBtnText : 'OK',
                 primary: true,
-                action: function() { otherOpts.ok.call(kDialog, destroy); return false },
-                _isOkBtn: true,
+                action: function() { otherOpts.ok.call(kDialog, kDialog.__destroy); return false },
             });
         }
 

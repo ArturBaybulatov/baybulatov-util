@@ -590,7 +590,7 @@
 
         return _.tap(document.createElement('a'), function(a) {
             a.href = 'http://xxx/';
-            a.pathname = `${path1}${path2}`;
+            a.pathname = path1 + path2;
         }).pathname.replace(/^\/?/, '/');
     };
 
