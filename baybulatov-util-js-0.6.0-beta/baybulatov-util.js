@@ -582,7 +582,17 @@
         else if  (g < 0) g = 0;
 
         return '#' + ('00000' + (g | (b << 8) | (r << 16)).toString(16)).substr(-6);
-    }
+    };
+
+
+    var joinPaths = util.joinPaths = function(path1, path2) {
+        ensure.string(path1, path2);
+
+        return _.tap(document.createElement('a'), function(a) {
+            a.href = 'http://xxx/';
+            a.pathname = `${path1}${path2}`;
+        }).pathname.replace(/^\/?/, '/');
+    };
 
 
     var $body = $('body');
