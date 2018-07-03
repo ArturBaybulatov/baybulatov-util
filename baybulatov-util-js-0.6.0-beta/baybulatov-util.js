@@ -398,6 +398,85 @@
     };
 
 
+
+    var spellNumberRu = util.spellNumberRu = function(num, feminine) {
+        // Original: http://shpargalkablog.ru/2017/05/writing-number-letters.html
+
+
+        ensure(Number.isSafeInteger(num) && num >= 0, 'Safe non-negative integer expected'); // TODO: Support big numbers
+        ensure.maybe.boolean(feminine);
+
+
+        num = num.toString();
+
+
+        let result = '';
+
+        const names = [
+            [null, 'тысяч', 'миллион', 'миллиард', 'триллион', 'квадриллион', 'квинтиллион', 'секстиллион', 'септиллион', 'октиллион', 'нониллион', 'дециллион'],
+            ['а', 'и', ''],
+            ['', 'а', 'ов'],
+        ];
+
+        if (num == '' || num == '0') return 'ноль';
+
+        num = num.split(/(?=(?:\d{3})+$)/); // Разбить число в массив с трёхзначными числами
+
+        if (num[0].length == 1) num[0] = '00' + num[0];
+        if (num[0].length == 2) num[0] = '0' + num[0];
+
+        for (let j = num.length - 1; j >= 0; j--) { // Соединить трёхзначные числа в одно число, добавив названия разрядов с окончаниями
+            if (num[j] == '000') continue;
+
+            result = (
+                ((feminine && j == num.length - 1) || j == num.length - 2)
+                    && (num[j][2] == '1' || num[j][2] == '2')
+                        ? spellNumberGroupRu(num[j], true)
+                        : spellNumberGroupRu(num[j])
+            ) + morph2(
+                num[j],
+                names[0][num.length - 1 - j],
+                j == num.length - 2 ? names[1] : names[2],
+            ) + result;
+        }
+
+        return result.trim();
+    };
+
+
+    var spellNumberGroupRu = util.spellNumberGroupRu = function(num, feminine) {
+        ensure(ensure.string(num).length === 3, 'String of exactly length = 3 expected');
+        ensure.nonNegativeInteger(Number(ensure.numeric(num)));
+
+        ensure.maybe.boolean(feminine);
+
+
+        const names = [
+            ['', ' один', ' два', ' три', ' четыре', ' пять', ' шесть', ' семь', ' восемь', ' девять'],
+            [' десять', ' одиннадцать', ' двенадцать', ' тринадцать', ' четырнадцать', ' пятнадцать', ' шестнадцать', ' семнадцать', ' восемнадцать', ' девятнадцать'],
+            ['', '', ' двадцать', ' тридцать', ' сорок', ' пятьдесят', ' шестьдесят', ' семьдесят', ' восемьдесят', ' девяносто'],
+            ['', ' сто', ' двести', ' триста', ' четыреста', ' пятьсот', ' шестьсот', ' семьсот', ' восемьсот', ' девятьсот'],
+            ['', ' одна', ' две'],
+        ];
+
+
+        return names[3][num[0]] + (num[1] == 1 ? names[1][num[2]] : names[2][num[1]] + (feminine ? names[4][num[2]] : names[0][num[2]]));
+    };
+
+
+    var morph2 = util.morph2 = function(num, root, suffixes) {
+        ensure.nonNegativeInteger(Number(ensure.numeric(ensure.string(num))));
+        ensure.maybe.string(root);
+        ensure(ensure.array(suffixes).length === 3, 'Array of length = 3 expected');
+
+
+        const rules = [2, 0, 1, 1, 1, 2, 2, 2, 2, 2];
+        if (root == null) return '';
+        return ' ' + root + (num[num.length - 2] == '1' ? suffixes[2] : suffixes[rules[num[num.length - 1]]]);
+    };
+
+
+
     var randomIdent = util.randomIdent = function(size) {
         if (size == null)
             size = 8;
