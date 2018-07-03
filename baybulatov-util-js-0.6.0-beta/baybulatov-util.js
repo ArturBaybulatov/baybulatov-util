@@ -274,16 +274,6 @@
     };
 
 
-    var isJqElement = util.isJqElement = function(val) {
-        return val instanceof jQuery && val.length === 1; // Only one expected
-    };
-
-
-    var isNonEmptyJqCollection = util.isNonEmptyJqCollection = function(val) {
-        return val instanceof jQuery && val.length !== 0;
-    };
-
-
     var flat2tree = util.flat2tree = function(arr, idKey, parentIdKey, childrenKey) {
         var groups = _.groupBy(arr, function(item) { return item[parentIdKey] == null ? '__root' : item[parentIdKey] });
         arr.forEach(function(item) { delete item[parentIdKey] }); // No need
@@ -459,7 +449,6 @@
     _ensurify('function', function(val) { return typeof val === 'function' }, 'Function');
     _ensurify('boolean', function(val) { return typeof val === 'boolean' }, 'Boolean');
     _ensurify('string', function(val) { return typeof val === 'string' }, 'String');
-    _ensurify('jqCollection', function(val) { return val instanceof jQuery }, 'jQuery collection');
     _ensurify('nonEmptyString', isNonEmptyString, 'Non-empty string');
     _ensurify('number', isNumber, 'Number');
     _ensurify('positiveNumber', isPositiveNumber, 'Positive number');
@@ -472,8 +461,6 @@
     _ensurify('plainObject', _.isPlainObject, 'Plain object');
     _ensurify('array', Array.isArray, 'Array');
     _ensurify('nonEmptyArray', isNonEmptyArray, 'Non-empty array');
-    _ensurify('jqElement', isJqElement, 'jQuery element');
-    _ensurify('nonEmptyJqCollection', isNonEmptyJqCollection, 'Non-empty jQuery collection');
     _ensurify('date', isDate, 'Valid date');
     _ensurify('hexColorString', isHexColorString, 'Hex color string');
 
@@ -522,7 +509,10 @@
 
         return function(err) {
             if (err instanceof util.HttpAuthError) msg = 'Authentication problem. Try logging in (again)';
-            toastr.error(err.message, msg);
+
+            if (typeof toastr === 'object') toastr.error(err.message, msg);
+            else alert(msg + '\n\n' + err.message);
+
             console.error(err);
             throw err;
         };
@@ -595,22 +585,39 @@
     };
 
 
-    var $body = $('body');
+    if (typeof jQuery === 'function') {
+        var isJqElement = util.isJqElement = function(val) {
+            return val instanceof jQuery && val.length === 1; // Only one expected
+        };
 
-    var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
-    $body.append($overlay.hide());
+        var isNonEmptyJqCollection = util.isNonEmptyJqCollection = function(val) {
+            return val instanceof jQuery && val.length !== 0;
+        };
 
-    var showOverlay = util.showOverlay = function(str, isHtml) {
-        ensure.nonEmptyString(str);
-        ensure.maybe.boolean(isHtml);
 
-        if (isHtml)
-            $overlay.find('[js-text]').html(str);
-        else
-            $overlay.find('[js-text]').text(str);
+        _ensurify('jqCollection', function(val) { return val instanceof jQuery }, 'jQuery collection');
+        _ensurify('jqElement', isJqElement, 'jQuery element');
+        _ensurify('nonEmptyJqCollection', isNonEmptyJqCollection, 'Non-empty jQuery collection');
 
-        $overlay.stop().fadeIn();
-    };
 
-    var hideOverlay = util.hideOverlay = function() { $overlay.stop().fadeOut() };
+
+        var $body = $('body');
+
+        var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
+        $body.append($overlay.hide());
+
+        var showOverlay = util.showOverlay = function(str, isHtml) {
+            ensure.nonEmptyString(str);
+            ensure.maybe.boolean(isHtml);
+
+            if (isHtml)
+                $overlay.find('[js-text]').html(str);
+            else
+                $overlay.find('[js-text]').text(str);
+
+            $overlay.stop().fadeIn();
+        };
+
+        var hideOverlay = util.hideOverlay = function() { $overlay.stop().fadeOut() };
+    }
 }());
