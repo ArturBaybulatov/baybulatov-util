@@ -17,18 +17,35 @@
 
     var formatDate = util.formatDate = function(date) {
         ensure.date(date);
+
         return [date.getFullYear(), pad(date.getMonth() + 1), pad(date.getDate())].join('-');
     };
 
 
     var formatDateRu = util.formatDateRu = function(date) {
         ensure.date(date);
+
         return [pad(date.getDate()), pad(date.getMonth() + 1), date.getFullYear()].join('.');
     };
 
 
     var formatTime = util.formatTime = function(date) { // There's no JavaScript "time" type
+        ensure.date(date);
+
         return [pad(date.getHours()), pad(date.getMinutes()), pad(date.getSeconds())].join(':');
+    };
+
+
+    var formatDuration = util.formatDuration = function(duration) {
+        ensure.nonNegativeInteger(duration); // Seconds
+
+        var date = new Date(new Date(2000, 0, 1).getTime() + duration * 1000);
+
+        return [
+            date.getHours() !== 0 ? pad(date.getHours()) : null,
+            pad(date.getMinutes()),
+            pad(date.getSeconds()),
+        ].filter(function(x) { return x != null }).join(':');
     };
 
 
