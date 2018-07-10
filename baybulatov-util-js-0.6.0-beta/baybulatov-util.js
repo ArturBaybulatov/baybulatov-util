@@ -681,6 +681,22 @@
     };
 
 
+    var svg = util.svg = function(id) {
+        ensure.nonEmptyString(id);
+        ensure(id[0] !== '#', 'ID without hash symbol expected');
+
+
+        const svgElem = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+        const useElem = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + id);
+
+        svgElem.appendChild(useElem);
+
+        return svgElem;
+    };
+
+
     if (typeof jQuery === 'function') {
         var isJqElement = util.isJqElement = function(val) {
             return val instanceof jQuery && val.length === 1; // Only one expected
