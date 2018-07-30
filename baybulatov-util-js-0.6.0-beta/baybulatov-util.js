@@ -36,13 +36,14 @@
     };
 
 
-    var formatDuration = util.formatDuration = function(duration) {
+    var formatDuration = util.formatDuration = function(duration, full) {
         ensure.nonNegativeInteger(duration); // Seconds
+        ensure.maybe.boolean(full);
 
         var date = new Date(new Date(2000, 0, 1).getTime() + duration * 1000);
 
         return [
-            date.getHours() !== 0 ? pad(date.getHours()) : null,
+            full ? pad(date.getHours()) : date.getHours() !== 0 ? pad(date.getHours()) : null,
             pad(date.getMinutes()),
             pad(date.getSeconds()),
         ].filter(function(x) { return x != null }).join(':');
