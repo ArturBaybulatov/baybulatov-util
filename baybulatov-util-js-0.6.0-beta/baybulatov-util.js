@@ -18,14 +18,14 @@
     var formatDate = util.formatDate = function(date) {
         ensure.date(date);
 
-        return [date.getFullYear(), pad(date.getMonth() + 1), pad(date.getDate())].join('-');
+        return [pad(date.getFullYear(), 4), pad(date.getMonth() + 1), pad(date.getDate())].join('-');
     };
 
 
     var formatDateRu = util.formatDateRu = function(date) {
         ensure.date(date);
 
-        return [pad(date.getDate()), pad(date.getMonth() + 1), date.getFullYear()].join('.');
+        return [pad(date.getDate()), pad(date.getMonth() + 1), pad(date.getFullYear(), 4)].join('.');
     };
 
 
@@ -37,10 +37,10 @@
 
 
     var formatDuration = util.formatDuration = function(duration, full) {
-        ensure.nonNegativeInteger(duration); // Seconds
+        ensure.nonNegativeNumber(duration); // Seconds
         ensure.maybe.boolean(full);
 
-        var date = new Date(new Date(2000, 0, 1).getTime() + duration * 1000);
+        var date = new Date(new Date('0001-01-01T00:00:00').getTime() + duration * 1000);
 
         return [
             full ? pad(date.getHours()) : date.getHours() !== 0 ? pad(date.getHours()) : null,
@@ -50,8 +50,9 @@
     };
 
 
-    var pad = util.pad = function(n) {
-        return n < 10 ? '0' + n : n;
+    var pad = util.pad = function(n, len) {
+        ensure.nonNegativeInteger(n);
+        return n.toString().padStart(isPositiveInteger(len) ? len : 2, '0');
     };
 
 
