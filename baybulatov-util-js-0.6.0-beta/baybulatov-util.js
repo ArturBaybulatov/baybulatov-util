@@ -29,10 +29,13 @@
     };
 
 
-    var formatTime = util.formatTime = function(date) { // There's no JavaScript "time" type
+    var formatTime = util.formatTime = function(date, full) { // There's no JavaScript "time" type
         ensure.date(date);
+        ensure.maybe.boolean(full);
 
-        return [pad(date.getHours()), pad(date.getMinutes()), pad(date.getSeconds())].join(':');
+        return [pad(date.getHours()), pad(date.getMinutes()), full ? pad(date.getSeconds()) : null]
+            .filter(function(x) { return x != null })
+            .join(':');
     };
 
 
