@@ -630,9 +630,9 @@
     var responseToError = util.responseToError = function(res) {
         ensure.object(res);
 
-        var msg = res.status + ' ' + res.statusText;
+        //var msg = res.status + ' ' + res.statusText;
 
-        if (isNonEmptyString(res.responseText)) msg += ': ' + _.truncate(res.responseText, { length: 100 });
+        if (isNonEmptyString(res.responseText)) var msg = _.truncate(res.responseText, { length: 100 });
 
         var err = res.status === 401 ? new HttpAuthError(msg) : new Error(msg);
 
