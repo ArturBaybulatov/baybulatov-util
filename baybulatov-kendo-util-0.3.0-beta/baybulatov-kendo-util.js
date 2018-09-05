@@ -19,28 +19,30 @@
             actions: [{ text: util.isNonEmptyString(otherOpts.closeBtnText) ? otherOpts.closeBtnText : 'Close' }],
         };
 
-        var kDialog = $('<div>').kendoDialog(options).data('kendoDialog');
-        kDialog.__destroy = function() { kDialog.destroy(); $('.k-overlay').remove() };
+        var kPopup = $('<div>').kendoDialog(options).data('kendoDialog');
+        kPopup.__destroy = function() { kPopup.destroy(); $('.k-overlay').remove() };
 
         // TODO: Get rid of the second argument (`kDialog.__destroy`) in the next version:
-        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kDialog, kDialog.__destroy);
+        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kPopup, kPopup.__destroy);
 
         if (typeof otherOpts.ok === 'function') {
             options.actions.unshift({
                 text: util.isNonEmptyString(otherOpts.okBtnText) ? otherOpts.okBtnText : 'OK',
                 primary: true,
-                action: function() { otherOpts.ok.call(kDialog, kDialog.__destroy); return false },
+                action: function() { otherOpts.ok.call(kPopup, kPopup.__destroy); return false },
             });
         }
 
         options.close = function() {
-            if (typeof otherOpts.close === 'function') otherOpts.close.call(kDialog);
+            if (typeof otherOpts.close === 'function') otherOpts.close.call(kPopup);
             this.destroy();
         };
 
-        kDialog.setOptions(Object.assign(options, extraOptions));
+        kPopup.setOptions(Object.assign(options, extraOptions));
 
-        return kDialog;
+        if (otherOpts.backdropClose !== false) $(document).on('click', '.k-overlay', () => kPopup.close());
+
+        return kPopup;
     };
 
 
