@@ -40,7 +40,7 @@
 
         kPopup.setOptions(Object.assign(options, extraOptions));
 
-        if (options.closable !== false) $(document).on('click', '.k-overlay', () => kPopup.close());
+        if (options.closable !== false) $(document).on('click', '.k-overlay', function() { kPopup.close() });
 
         return kPopup;
     };
