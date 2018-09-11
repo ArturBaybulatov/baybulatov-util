@@ -618,10 +618,9 @@
         return function(err) {
             if (err instanceof util.HttpAuthError) msg = 'Authentication problem. Try logging in (again)';
 
-            if (typeof toastr === 'object') toastr.error(err.message, msg);
+            if (_.isObject(toastr)) toastr.error(err.message, msg);
             else alert(msg + '\n\n' + err.message);
 
-            console.error(err);
             throw err;
         };
     };
