@@ -44,9 +44,10 @@
         ensure.maybe.boolean(full);
 
         var date = new Date(new Date('0001-01-01T00:00:00').getTime() + duration * 1000);
+        var hours = dateFns.differenceInHours(date, new Date('0001-01-01T00:00:00'));
 
         return [
-            full ? pad(date.getHours()) : date.getHours() !== 0 ? pad(date.getHours()) : null,
+            full ? pad(hours) : hours === 0 ? null : pad(hours),
             pad(date.getMinutes()),
             pad(date.getSeconds()),
         ].filter(function(x) { return x != null }).join(':');
