@@ -12,6 +12,6 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack"
+    "build": "npm run clean && webpack && rimraf dist/__ignore__.js"
   }
 }
