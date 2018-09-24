@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "baybulatov-util-js", "baybulatov-util-js.njsproj", "{79FB9E16-6A51-4B42-AC4A-6021E4CBA011}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "baybulatov-util", "baybulatov-util.njsproj", "{79FB9E16-6A51-4B42-AC4A-6021E4CBA011}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
