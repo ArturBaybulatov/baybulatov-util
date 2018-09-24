@@ -7,7 +7,7 @@ const extractStyles = new ExtractTextPlugin('[name].css');
 
 module.exports = {
     context: path.resolve('src/'), // Needs to be an absolute path
-    entry: { index: './index.less' },
+    entry: { 'baybulatov-util': './baybulatov-util.less' },
 
     output: {
         path: path.resolve('dist/'), // Needs to be an absolute path
