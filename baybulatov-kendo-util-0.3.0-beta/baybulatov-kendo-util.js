@@ -46,6 +46,65 @@
     };
 
 
+    var popup2 = kendoUtil.popup2 = function(extraOptions) {
+        console.warn('This function supposed to be renamed to "popup"');
+
+
+        ensure.maybe.plainObject(extraOptions);
+
+
+        if (!_.isPlainObject(extraOptions)) extraOptions = {}; // To prevent reference errors
+
+
+        const maxWidth = util.isPositiveInteger(extraOptions.maxWidth) ? extraOptions.maxWidth : 400;
+        const maxHeight = util.isPositiveInteger(extraOptions.maxHeight) ? extraOptions.maxHeight : 300;
+
+
+        const kPopup = $('<div class="f-grow line-height" style="padding: 0"></div>').kendoDialog(Object.assign({
+            visible: false,
+        }, extraOptions)).getKendoDialog();
+
+
+        kPopup.__destroy = function() { kPopup.destroy(); $('.k-overlay').remove() };
+
+
+        const popupId = util.randomIdent();
+
+        kPopup.bind('open', function() { this.wrapper.addClass('flex f-col') });
+        kPopup.bind('close', function() { this.destroy(); $(window).off('resize.' + popupId) });
+
+
+        if (kPopup.options.closable !== false) $(document).on('click', '.k-overlay', function() { kPopup.close() });
+
+
+        adjustPopupSize();
+
+        $(window).on('resize.' + popupId, adjustPopupSize);
+
+
+        return kPopup;
+
+
+        function adjustPopupSize() {
+            const intervId = setInterval(function() {
+                const availableWidth = $(window).width() - 40;
+
+                kPopup.element.css('width', availableWidth < maxWidth ? availableWidth : maxWidth);
+
+
+                const availableHeight = $(window).height() - 160;
+
+                kPopup.element.css('height', availableHeight < maxHeight ? availableHeight : maxHeight);
+
+
+                kPopup.center();
+            }, 100);
+
+            setTimeout(function() { clearInterval(intervId) }, 500);
+        }
+    };
+
+
     var $spinner = $('<div>', { html: $('<div>', { class: 'spinner', attr: { 'js-spinner': '' } }) });
 
     var kSpinner = $spinner.kendoDialog({
