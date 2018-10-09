@@ -7,6 +7,9 @@
 
 
     var popup = kendoUtil.popup = function(extraOptions, otherOpts) {
+        console.warn('This function logic to be replaced with one from "popup2" function');
+
+
         ensure.maybe.plainObject(extraOptions, otherOpts);
 
         if (!_.isPlainObject(otherOpts)) otherOpts = {}; // To prevent reference errors
