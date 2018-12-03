@@ -9,6 +9,12 @@ ul,
 ol {
   margin: 0;
 }
+.nogap {
+  margin: 0;
+}
+.nogap\! {
+  margin: 0 !important;
+}
 .gap-xs {
   margin: 6px;
 }
@@ -38,6 +44,14 @@ ol {
 }
 .gap-xl\! {
   margin: 80px !important;
+}
+.nohgap {
+  margin-left: 0;
+  margin-right: 0;
+}
+.nohgap\! {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .hgap-xs {
   margin-left: 6px;
@@ -79,6 +93,14 @@ ol {
   margin-left: 80px !important;
   margin-right: 80px !important;
 }
+.novgap {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.novgap\! {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 .vgap-xs {
   margin-top: 6px;
   margin-bottom: 6px;
@@ -119,6 +141,12 @@ ol {
   margin-top: 80px !important;
   margin-bottom: 80px !important;
 }
+.nolgap {
+  margin-left: 0;
+}
+.nolgap\! {
+  margin-left: 0 !important;
+}
 .lgap-xs {
   margin-left: 6px;
 }
@@ -148,6 +176,12 @@ ol {
 }
 .lgap-xl\! {
   margin-left: 80px !important;
+}
+.norgap {
+  margin-right: 0;
+}
+.norgap\! {
+  margin-right: 0 !important;
 }
 .rgap-xs {
   margin-right: 6px;
@@ -179,6 +213,12 @@ ol {
 .rgap-xl\! {
   margin-right: 80px !important;
 }
+.notgap {
+  margin-top: 0;
+}
+.notgap\! {
+  margin-top: 0 !important;
+}
 .tgap-xs {
   margin-top: 6px;
 }
@@ -209,6 +249,12 @@ ol {
 .tgap-xl\! {
   margin-top: 80px !important;
 }
+.nobgap {
+  margin-bottom: 0;
+}
+.nobgap\! {
+  margin-bottom: 0 !important;
+}
 .bgap-xs {
   margin-bottom: 6px;
 }
@@ -238,6 +284,12 @@ ol {
 }
 .bgap-xl\! {
   margin-bottom: 80px !important;
+}
+.nopad {
+  padding: 0;
+}
+.nopad\! {
+  padding: 0 !important;
 }
 .pad-xs {
   padding: 6px;
@@ -468,18 +520,6 @@ ol {
 }
 .bpad-xl\! {
   padding-bottom: 80px !important;
-}
-.nogap {
-  margin: 0;
-}
-.nogap\! {
-  margin: 0 !important;
-}
-.nopad {
-  padding: 0;
-}
-.nopad\! {
-  padding: 0 !important;
 }
 .flex {
   display: -webkit-flex;
