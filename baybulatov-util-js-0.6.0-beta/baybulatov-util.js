@@ -236,14 +236,17 @@
 
 
     var isHexColorString = util.isHexColorString = function(val) {
-        ensure.nonEmptyString(val);
-        return /^#[0-9a-f]{6}$/i.test(val);
+        return isNonEmptyString(val) && /^#[0-9a-f]{6}$/i.test(val);
     };
 
 
     var isPixelValueString = util.isPixelValueString = function(val) {
-        ensure.nonEmptyString(val);
-        return /^(\d+|\d+\.\d+)px$/.test(val);
+        return isNonEmptyString(val) && /^(\d+|\d+\.\d+)px$/.test(val);
+    };
+
+
+    var isEmail = util.isEmail = function(val) {
+        return isNonEmptyString(val) && /^[a-z0-9_-]+@[a-z0-9-]+(\.[a-z]+)+$/i.test(val);
     };
 
 
@@ -572,6 +575,7 @@
     _ensurify('date', isDate, 'Valid date');
     _ensurify('hexColorString', isHexColorString, 'Hex color string');
     _ensurify('pixelValueString', isPixelValueString, 'Pixel value string');
+    _ensurify('email', isEmail, 'E-mail');
 
     function _ensurify(identifier, predicate, type) {
         ensure(isNonEmptyString(identifier), 'Non-empty string expected');

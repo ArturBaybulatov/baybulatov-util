@@ -621,6 +621,26 @@ ol {
       -ms-flex-pack: end !important;
           justify-content: flex-end !important;
 }
+.f-space-between {
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.f-space-between\! {
+  -webkit-justify-content: space-between !important;
+      -ms-flex-pack: justify !important;
+          justify-content: space-between !important;
+}
+.f-space-around {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.f-space-around\! {
+  -webkit-justify-content: space-around !important;
+      -ms-flex-pack: distribute !important;
+          justify-content: space-around !important;
+}
 .nowrap {
   white-space: nowrap;
 }
