@@ -689,6 +689,8 @@
 
 
     var joinPaths = util.joinPaths = function(path1, path2) {
+        // Deprecate in favor of URI.js `new URI(path2, path1).path()` instead?
+
         ensure.string(path1, path2);
 
         return _.tap(document.createElement('a'), function(a) {

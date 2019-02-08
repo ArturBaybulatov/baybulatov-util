@@ -108,9 +108,8 @@
     };
 
 
-    var $spinner = $('<div>', { html: $('<div>', { class: 'spinner', attr: { 'js-spinner': '' } }) });
-
-    var kSpinner = $spinner.kendoDialog({
+    var kSpinner = $('<div>').kendoDialog({
+        content: '<div class="spinner" js-spinner></div>',
         visible: false,
         closable: false,
         title: '',
@@ -127,8 +126,19 @@
         backgroundColor: 'transparent',
         border: 'none',
         overflow: 'visible',
+        boxShadow: 'none',
     });
 
-    var blockUi = kendoUtil.blockUi = function() { kSpinner.open() };
-    var unblockUi = kendoUtil.unblockUi = function() { kSpinner.close() };
+
+    let spinnerCount = 0;
+
+    var blockUi = kendoUtil.blockUi = function() {
+        if (spinnerCount === 0) kSpinner.open();
+        ++spinnerCount;
+    };
+
+    var unblockUi = kendoUtil.unblockUi = function() {
+        if (spinnerCount === 1) kSpinner.close();
+        --spinnerCount;
+    };
 }());
