@@ -246,7 +246,7 @@
 
 
     var isEmail = util.isEmail = function(val) {
-        return isNonEmptyString(val) && /^[a-z0-9_-]+@[a-z0-9-]+(\.[a-z]+)+$/i.test(val);
+        return isNonEmptyString(val) && /^[a-z0-9_\-]+(\.[a-z0-9_\-]+)*@[a-z0-9-]+(\.[a-z]+)+$/i.test(val);
     };
 
 
