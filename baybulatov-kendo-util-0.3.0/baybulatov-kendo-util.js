@@ -6,46 +6,6 @@
     var ensure = util.ensure;
 
 
-    var popup_ = kendoUtil.popup_ = function(extraOptions, otherOpts) {
-        ensure.maybe.plainObject(extraOptions, otherOpts);
-
-        if (!_.isPlainObject(otherOpts)) otherOpts = {}; // To prevent reference errors
-
-        var options = {
-            visible: false,
-            minWidth: 400,
-            maxWidth: 800,
-            maxHeight: 600,
-            actions: [{ text: util.isNonEmptyString(otherOpts.closeBtnText) ? otherOpts.closeBtnText : 'Close' }],
-        };
-
-        var kPopup = $('<div>').kendoDialog(options).data('kendoDialog');
-        kPopup.__destroy = function() { kPopup.destroy(); $('.k-overlay').remove() };
-
-        // TODO: Get rid of the second argument (`kDialog.__destroy`) in the next version:
-        if (typeof otherOpts.open === 'function') options.open = otherOpts.open.bind(kPopup, kPopup.__destroy);
-
-        if (typeof otherOpts.ok === 'function') {
-            options.actions.unshift({
-                text: util.isNonEmptyString(otherOpts.okBtnText) ? otherOpts.okBtnText : 'OK',
-                primary: true,
-                action: function() { otherOpts.ok.call(kPopup, kPopup.__destroy); return false },
-            });
-        }
-
-        options.close = function() {
-            if (typeof otherOpts.close === 'function') otherOpts.close.call(kPopup);
-            this.destroy();
-        };
-
-        kPopup.setOptions(Object.assign(options, extraOptions));
-
-        if (options.closable !== false) $(document).on('click', '.k-overlay', function() { kPopup.close() });
-
-        return kPopup;
-    };
-
-
     var popup = kendoUtil.popup = function(extraOptions) {
         ensure.maybe.plainObject(extraOptions);
 
