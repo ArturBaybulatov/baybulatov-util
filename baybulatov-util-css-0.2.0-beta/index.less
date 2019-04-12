@@ -360,3 +360,40 @@ h1, h2, h3, h4, h5, h6, p, ul, ol { margin: 0 }
 
 .hoverable { &:hover { opacity: 0.8 } }
 .hoverable\! { &:hover { opacity: 0.8 !important } }
+
+
+// UI widgets ----------------------------------------------------
+
+button.button,
+.button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #eee;
+    color: #999;
+    font-family: sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    user-select: none;
+
+    &:not([disabled]) {
+        background: #0069ed;
+        color: #ffffff;
+        cursor: pointer;
+
+        &:hover { background: #0053ba }
+
+        &:focus {
+            outline: 1px solid #fff;
+            outline-offset: -4px;
+        }
+
+        &:active { transform: scale(0.96) }
+    }
+}
