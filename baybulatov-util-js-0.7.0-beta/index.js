@@ -698,6 +698,26 @@ export const svg = function(id) {
 };
 
 
+export const colorToRgb = function(color) {
+    console.warn('Experimental');
+
+    ensure.nonEmptyString(color);
+
+    const span = document.createElement('span');
+
+    span.style.color = color;
+    span.style.display = 'none';
+
+    document.body.appendChild(span);
+
+    const rgbColor = window.getComputedStyle(span).color;
+
+    document.body.removeChild(span);
+
+    return rgbColor;
+};
+
+
 
 // If jQuery --------------------------------------------
 
