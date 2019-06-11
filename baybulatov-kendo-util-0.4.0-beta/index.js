@@ -29,7 +29,7 @@ export const popup = function(extraOptions) {
     kPopup.bind('close', function() { this.destroy(); $(window).off(`resize.${ popupId }`) });
 
 
-    if (kPopup.options.closable !== false) $(document).on('click', '.k-overlay', () => kPopup.close());
+    $(document).on('click', '.k-overlay', () => { if (kPopup.options.closable !== false) kPopup.close() });
 
 
     adjustPopupSize();

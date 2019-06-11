@@ -51,7 +51,23 @@ export const pad = function(n, len) {
 };
 
 
+export const isBeforeDay = function(date1, date2) {
+    ensure.date(date1, date2);
+
+    return dateFns.isBefore(dateFns.startOfDay(date1), dateFns.startOfDay(date2));
+};
+
+
+export const isAfterDay = function(date1, date2) {
+    ensure.date(date1, date2);
+
+    return dateFns.isAfter(dateFns.startOfDay(date1), dateFns.startOfDay(date2));
+};
+
+
 export const isSameDay = function(d1, d2) {
+    console.warn('Deprecated in favor of dateFns.isSameDay(…)');
+
     return (
         d1.getFullYear() === d2.getFullYear() &&
         d1.getMonth() === d2.getMonth() &&
