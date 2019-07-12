@@ -734,6 +734,31 @@ export const colorToRgb = function(color) {
 };
 
 
+export const ifThen = function(cond, thenResult, customElseResult) {
+    ensure(['boolean', 'function'].includes(typeof cond) || cond == null, 'Boolean, function or null-like expected');
+
+    if (arguments.length < 3) customElseResult = '';
+
+    if (typeof cond === 'boolean' && cond) return thenResult;
+    else if (typeof cond === 'function' && cond()) return thenResult;
+    else return customElseResult;
+};
+
+
+export const roundTo = function(n, to) {
+    ensure.number(n);
+    ensure.nonNegativeNumber(to);
+
+    return Math.round(n * (1 / to)) * to;
+};
+
+
+export const escapeHtmlAttr = function(str) {
+    ensure.string(str);
+
+    return $('<div>', { foo: str }).prop('outerHTML').match(/^\<div\sfoo="(.*)"\>\<\/div\>$/)[1];
+};
+
 
 // If jQuery --------------------------------------------
 
