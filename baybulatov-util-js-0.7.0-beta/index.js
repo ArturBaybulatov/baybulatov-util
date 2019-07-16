@@ -200,8 +200,86 @@ export const visuallyRandomNumber = function() {
 };
 
 
-export const randomDate = function() {
-    return new Date(_.random(1990, 2017), _.random(11), _.random(1, 28));
+export const randomDate = (date1, date2) => {
+    ensure.date(date1, date2);
+    ensure(isBeforeDay(date1, date2) || dateFns.isSameDay(date1, date2), 'Correct period expected');
+
+    return dateFns.startOfDay(new Date(_.random(date1.getTime(), date2.getTime())));
+};
+
+
+export const formatDateHuman = (date, includeDay) => {
+    ensure.date(date);
+    ensure.maybe.boolean(includeDay);
+
+    const ru = { locale: dateFns.ru };
+
+    const monthName = dateFns.format(date, 'D MMMM', ru).split(' ')[1].slice(0, 3);
+
+    let dateStr = `${ date.getDate() } ${ monthName }`;
+
+    if (includeDay) dateStr = `${ _.capitalize(dateFns.format(date, 'dd', ru)) } ${ dateStr }`;
+
+    if (date.getFullYear() !== new Date().getFullYear())
+        return `${ dateStr } '${ dateFns.format(date, 'YY') }`;
+
+    return dateStr;
+};
+
+
+export const formatPeriod = function(date1, date2) {
+    ensure.date(date1, date2);
+
+
+    const ru = { locale: dateFns.ru };
+
+    if (date1.getMonth() === date2.getMonth()) {
+        const monthName = dateFns.format(date1, 'D MMMM', ru).split(' ')[1].slice(0, 3);
+
+        let period = `${ date1.getDate() }–${ date2.getDate() } ${ monthName }`;
+
+        if (date1.getFullYear() !== new Date().getFullYear())
+            period = `${ period } '${ dateFns.format(date1, 'YY') }`;
+
+        return period;
+    } else {
+        const month1Name = dateFns.format(date1, 'D MMMM', ru).split(' ')[1].slice(0, 3);
+
+        let periodFrom = `${ date1.getDate() } ${ month1Name }`;
+
+        if (date1.getFullYear() !== new Date().getFullYear())
+            periodFrom = `${ periodFrom } '${ dateFns.format(date1, 'YY') }`;
+
+
+        const month2Name = dateFns.format(date2, 'D MMMM', ru).split(' ')[1].slice(0, 3);
+
+        let periodTo = `${ date2.getDate() } ${ month2Name }`;
+
+        if (date2.getFullYear() !== new Date().getFullYear())
+            periodTo = `${ periodTo } '${ dateFns.format(date2, 'YY') }`;
+
+
+        return `${ periodFrom }–${ periodTo }`;
+    }
+};
+
+
+export const mapPeriod = (fromDate, toDate, callback) => {
+    ensure.date(fromDate, toDate);
+    ensure(isBeforeDay(fromDate, toDate) || dateFns.isSameDay(fromDate, toDate), 'Correct period expected');
+    ensure.maybe.function(callback);
+
+    const arr = [];
+
+    let date = fromDate;
+
+    while (isBeforeDay(date, toDate) || dateFns.isSameDay(date, toDate)) {
+        arr.push(typeof callback === 'function' ? callback(date) : date);
+
+        date = dateFns.addDays(date, 1);
+    }
+
+    return arr;
 };
 
 
