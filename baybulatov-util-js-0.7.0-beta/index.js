@@ -314,6 +314,11 @@ export const isPositiveInteger = function(val) {
 };
 
 
+export const isNegativeInteger = function(val) {
+    return Number.isInteger(val) && val < 0;
+};
+
+
 export const isNonNegativeInteger = function(val) {
     return Number.isInteger(val) && val >= 0;
 };
