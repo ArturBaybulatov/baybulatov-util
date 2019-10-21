@@ -715,14 +715,23 @@ export const handleRejection = function(msg) {
 export const responseToError = function(res) {
     ensure.object(res);
 
+    if (res.status >= 500) {
+        const err = new Error(res.status + ' ' + res.statusText);
+        err._response = res;
+        throw err;
+    }
 
-    if (res.status >= 500) throw new Error(res.status + ' ' + res.statusText);
+    var msg = _.truncate(res.responseText, { length: 200 });
 
-
-    var msg = _.truncate(res.responseText, { length: 100 });
-
-    if (res.status === 401) throw new HttpAuthError(msg);
-    else throw new Error(msg);
+    if (res.status === 401) {
+        const err = new HttpAuthError(msg);
+        err._response = res;
+        throw err;
+    } else {
+        const err = new Error(msg);
+        err._response = res;
+        throw err;
+    }
 };
 
 
@@ -839,7 +848,7 @@ export const roundTo = function(n, to) {
 export const escapeHtmlAttr = function(str) {
     ensure.string(str);
 
-    return $('<div>', { foo: str }).prop('outerHTML').match(/^\<div\sfoo="(.*)"\>\<\/div\>$/)[1];
+    return $('<div>', { foo: str }).prop('outerHTML').match(/^\<div\sfoo="((.|\n)*)"\>\<\/div\>$/)[1];
 };
 
 
