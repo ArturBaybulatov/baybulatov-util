@@ -208,6 +208,14 @@ export const randomDate = (date1, date2) => {
 };
 
 
+export const randomDatetime = (date1, date2) => {
+    ensure.date(date1, date2);
+    ensure(dateFns.isBefore(date1, date2) || dateFns.isSameSecond(date1, date2), 'Correct period expected');
+
+    return new Date(_.random(date1.getTime(), date2.getTime()));
+};
+
+
 export const formatDateHuman = (date, includeDay) => {
     ensure.date(date);
     ensure.maybe.boolean(includeDay);
@@ -715,23 +723,17 @@ export const handleRejection = function(msg) {
 export const responseToError = function(res) {
     ensure.object(res);
 
-    if (res.status >= 500) {
-        const err = new Error(res.status + ' ' + res.statusText);
-        err._response = res;
-        throw err;
-    }
+    var msg;
 
-    var msg = _.truncate(res.responseText, { length: 200 });
-
-    if (res.status === 401) {
-        const err = new HttpAuthError(msg);
-        err._response = res;
-        throw err;
+    if (isNonEmptyString(res.responseText) && res.status < 500) {
+        msg = _.truncate(res.responseText.trim(), { length: 200 });
     } else {
-        const err = new Error(msg);
-        err._response = res;
-        throw err;
+        msg = res.status + ' ' + res.statusText;
     }
+
+    const err = res.status === 401 ? new HttpAuthError(msg) : new Error(msg);
+    err._response = res;
+    throw err;
 };
 
 
