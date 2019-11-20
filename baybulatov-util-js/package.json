@@ -1,0 +1,10 @@
+{
+  "name": "@arturbaybulatov/util-js",
+  "version": "0.8.0",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^2.8.0",
+    "lodash": "^4.17.15"
+  }
+}

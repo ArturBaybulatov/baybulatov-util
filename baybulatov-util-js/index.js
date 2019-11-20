@@ -35,6 +35,14 @@ export const formatTime = function(date, full) { // There's no JavaScript "time"
 };
 
 
+export const formatDateTime = function(date) {
+    ensure.date(date);
+    const displayDate=[pad(date.getFullYear(), 4), pad(date.getMonth() + 1), pad(date.getDate())].join('-');
+    const displayTime=formatTime(date,false);
+    return `${displayDate} ${displayTime}`;
+};
+
+
 export const formatDuration = function(duration, full) {
     ensure.nonNegativeNumber(duration); // Seconds
     ensure.maybe.boolean(full);
