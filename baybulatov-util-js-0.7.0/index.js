@@ -1,3 +1,8 @@
+import _ from 'lodash';
+import dateFns from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+
 export const NoSuchPathError = function(msg) { this.message = msg };
 NoSuchPathError.prototype = Object.create(Error.prototype);
 
@@ -220,7 +225,7 @@ export const formatDateHuman = (date, includeDay) => {
     ensure.date(date);
     ensure.maybe.boolean(includeDay);
 
-    const ru = { locale: dateFns.ru };
+    const ru = { locale: ruLocale };
 
     const monthName = dateFns.format(date, 'D MMMM', ru).split(' ')[1].slice(0, 3);
 
@@ -239,7 +244,7 @@ export const formatPeriod = function(date1, date2) {
     ensure.date(date1, date2);
 
 
-    const ru = { locale: dateFns.ru };
+    const ru = { locale: ruLocale };
 
     if (date1.getMonth() === date2.getMonth()) {
         const monthName = dateFns.format(date1, 'D MMMM', ru).split(' ')[1].slice(0, 3);
@@ -506,7 +511,7 @@ export const lorem = function(sentenceCount, wordCount) {
 
     return _.times(sentenceCount, function() {
         var currentWordCount = wordCount == null ? _.random(5, 30) : wordCount;
-        return _(vocab).sampleSize(currentWordCount).join(' ').capitalize().v;
+        return _.chain(vocab).sampleSize(currentWordCount).join(' ').capitalize().value();
     }).join('. ');
 };
 
@@ -620,7 +625,7 @@ export const randomIdent = function(size) {
         return '';
 
     if (size > 0)
-        return _(alpha).sample().concat(_.sampleSize(chars, size - 1)).join('').v;
+        return _.chain(alpha).sample().concat(_.sampleSize(chars, size - 1)).join('').value();
 };
 
 
@@ -848,44 +853,9 @@ export const roundTo = function(n, to) {
 
 
 export const escapeHtmlAttr = function(str) {
+    // TODO: Get rid of jQuery dependency
+
     ensure.string(str);
 
     return $('<div>', { foo: str }).prop('outerHTML').match(/^\<div\sfoo="((.|\n)*)"\>\<\/div\>$/)[1];
 };
-
-
-// If jQuery --------------------------------------------
-
-export const isJqElement = function(val) {
-    return val instanceof jQuery && val.length === 1; // Only one expected
-};
-
-export const isNonEmptyJqCollection = function(val) {
-    return val instanceof jQuery && val.length !== 0;
-};
-
-
-_ensurify('jqCollection', function(val) { return val instanceof jQuery }, 'jQuery collection');
-_ensurify('jqElement', isJqElement, 'jQuery element');
-_ensurify('nonEmptyJqCollection', isNonEmptyJqCollection, 'Non-empty jQuery collection');
-
-
-
-var $body = $('body');
-
-var $overlay = $('<div>', { class: 'overlay', html: $('<div>', { class: 'overlay__text', attr: { 'js-text': '' } }) });
-$body.append($overlay.hide());
-
-export const showOverlay = function(str, isHtml) {
-    ensure.nonEmptyString(str);
-    ensure.maybe.boolean(isHtml);
-
-    if (isHtml)
-        $overlay.find('[js-text]').html(str);
-    else
-        $overlay.find('[js-text]').text(str);
-
-    $overlay.stop().fadeIn();
-};
-
-export const hideOverlay = function() { $overlay.stop().fadeOut() };
